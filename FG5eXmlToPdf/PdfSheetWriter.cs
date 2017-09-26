@@ -11,12 +11,12 @@ namespace FG5eXmlToPDF
 {
     public class PdfSheetWriter
     {
-        public void Write(string template, Character character)
+        public void Write(string template, Character character, string outFile)
         {
 
-            PdfReader pdfReader = new PdfReader(template);
-            var stamper = new PdfStamper(pdfReader, new FileStream(@"c:\source\repo\FG5eXmlToPDF\FG5eXmlToPDF.Tests\out.pdf", FileMode.Create));
-            AcroFields form = stamper.AcroFields;
+            var pdfReader = new PdfReader(template);
+            var stamper = new PdfStamper(pdfReader, new FileStream(outFile, FileMode.Create));
+            var form = stamper.AcroFields;
             form.SetField("CharacterName", character.Name);
             stamper.Close();
         }

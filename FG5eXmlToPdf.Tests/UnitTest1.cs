@@ -8,14 +8,18 @@ namespace FG5eXmlToPdf.Tests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ReadWriteTest()
         {
-            var reader = new Fg5eXmlReader(@"c:\source\repo\FG5eXmlToPDF\FG5eXmlToPDF.Tests\rita.xml");
+            
+            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+            var reader = new Fg5eXmlReader($@"{currentDirectory}\rita.xml");
             var character = reader.Get();
 
             var writer = new PdfSheetWriter();
             //writer.FixPdf();
-            writer.Write(@"C:\Source\repo\FG5eXmlToPdf\FG5eXmlToPdf\DnD_5E_CharacterSheet - Form Fillable.pdf", character);
+            writer.Write($@"{currentDirectory}\DnD_5E_CharacterSheet - Form Fillable.pdf", 
+                character,
+                $@"{currentDirectory}\out.pdf");
         }
     }
 }
