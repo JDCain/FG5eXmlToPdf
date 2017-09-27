@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using FG5eXmlToPdf;
+using FG5eXmlToPdf.Models;
 using FG5eXmlToPDF.Models;
 // ReSharper disable All
 
@@ -24,24 +26,40 @@ namespace FG5eXmlToPDF
             //    from el in xml?.Root?.Element("character")?.Element("abilities").Elements()
             //    select el;
             
-            var list = xml.Root.Element("character")?.Element("abilities").Elements().ToList();
-            var a = new List<Ability>();
-            foreach (var attrib in list)
+            var abilityList = xml.Root.Element("character")?.Element("abilities").Elements().ToList();
+            var abilitys = new List<Ability>();
+            foreach (var attrib in abilityList)
             {
-                a.Add(new Ability()
+                abilitys.Add(new Ability()
                 {
                     Name = attrib.Name.ToString(),
                     Score = int.Parse(attrib.Element("score").Value),
                     Bonus = int.Parse(attrib.Element("bonus").Value),
                     Save = int.Parse(attrib.Element("save").Value),
                     Savemodifier = int.Parse(attrib.Element("savemodifier").Value),
-                    Saveprof = int.Parse(attrib.Element("saveprof").Value),
+                    Saveprof = Helper.StringIntToBool(attrib.Element("saveprof").Value)
                 });
             }
+
+            var skillList = xml.Root.Element("character")?.Element("skilllist").Elements().ToList();
+            var skills = new List<Skill>();
+            foreach (var skill in skillList)
+            {
+                skills.Add(new Skill()
+                {
+                    Name = skill.Element("name").Value,
+                    Misc = int.Parse(skill.Element("misc").Value),
+                    Prof = Helper.StringIntToBool(skill.Element("prof").Value),
+                    Stat = skill.Element("stat").Value,
+                    Total = int.Parse(skill.Element("total").Value)
+                });
+            }
+
             return new Character5e()
             {
                 Name = name,
-                Abilities = a
+                Abilities = abilitys,
+                Skills = skills
             };
         }
 

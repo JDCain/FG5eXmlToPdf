@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using FG5eXmlToPdf;
 using FG5eXmlToPDF.Models;
 using iTextSharp.text.pdf;
 
@@ -35,15 +37,16 @@ namespace FG5eXmlToPDF
                 form.SetField(threeLetter, $"{ability.Score}");
                 form.SetField($"{threeLetter}mod", $"{ability.Bonus}");
                 form.SetField($"ST {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ability.Name)}", $"{ability.Save}");
-                form.SetField(saveCheckBoxMap[ability.Name], OnOrOff(ability.Saveprof));
+                form.SetField(saveCheckBoxMap[ability.Name], Helper.BoolToYesNo(ability.Saveprof));
+            }
+            foreach (var skill in character.Skills)
+            {
+                form.SetField(skill.Name, $"{skill.Total}");
+                form.SetField($"{skill.Name} Check Box", Helper.BoolToYesNo(skill.Prof));
             }
             stamper.Close();
         }
 
-        private static string OnOrOff(int s)
-        {
-            return s == 1 ? "Yes" : "No";
-        }
 
         private static Ability GetAbilityByName(Character5e character, string abulity)
         {

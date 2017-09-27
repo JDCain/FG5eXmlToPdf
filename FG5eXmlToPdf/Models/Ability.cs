@@ -6,7 +6,7 @@
         public int Bonus { get; set; }
         public int Save { get; set; }
         public int Savemodifier { get; set; }
-        public int Saveprof { get; set; }
+        public bool Saveprof { get; set; }
         public int Score { get; set; }
     }
 }
