@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using System.Xml.XPath;
 using FG5eXmlToPdf;
 using FG5eXmlToPdf.Models;
 using FG5eXmlToPDF.Models;
@@ -24,13 +25,15 @@ namespace FG5eXmlToPDF
 
 
             var character = new Character5e();
-            foreach (var prop in character.Properties.ToList())
+            var props = character.Properities;
+            foreach (var prop in props)
             {
-                character.Properties[prop.Key] = GetCharValue(prop.Key);
+                prop.Value = GetCharValue(prop.XmlPath);
             }
+            //props.Add("AC", _charElement.XPathSelectElement("defenses/ac/total")?.Value ?? string.Empty);
 
 
-            var abilityList = xml.Root.Element("character")?.Element("abilities").Elements().ToList();
+            var abilityList = _charElement?.Element("abilities").Elements().ToList();
             foreach (var attrib in abilityList)
             {
                 character.Abilities.Add(new Ability()
@@ -44,7 +47,7 @@ namespace FG5eXmlToPDF
                 });
             }
 
-            var skillList = xml.Root.Element("character")?.Element("skilllist").Elements().ToList();
+            var skillList = _charElement?.Element("skilllist").Elements().ToList();
             foreach (var skill in skillList)
             {
                 character.Skills.Add(new Skill()
@@ -66,7 +69,7 @@ namespace FG5eXmlToPDF
         private static string GetCharValue(string name)
         {
             //everything is lowercase as far as I can tell in the xml
-            return _charElement.Element(name.ToLower())?.Value ?? string.Empty;
+            return _charElement.XPathSelectElement(name.ToLower())?.Value.TrimStart('0') ?? string.Empty;
         }
     }
 }

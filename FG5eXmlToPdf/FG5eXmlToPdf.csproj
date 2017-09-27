@@ -48,6 +48,7 @@
     <Compile Include="Models\Ability.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Fg5ePdf.cs" />
+    <Compile Include="Models\Properity.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

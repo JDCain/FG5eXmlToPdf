@@ -7,22 +7,50 @@ namespace FG5eXmlToPDF.Models
     {
         public List<Skill> Skills { get;  }
         public List<Ability> Abilities { get; }
-        public Dictionary<string,string> Properties { get; }
-
+        //public Dictionary<string,string> Properties { get; }
+        public List<Properity> Properities { get; }
         public Character5e()
         {
-            Properties = new Dictionary<string, string>()
+            Properities = new List<Properity>()
             {
-                {"Name", "" },
-                {"Race", "" },
-                {"Background", "" },
-                {"ProfBonus", "" },
-                {"Alignment", "" },
+                //paths are from char level
+                new Properity("AC","defenses/ac/total"),
+                new Properity("Name"),
+                new Properity("Race"),
+                new Properity("Background"),
+                new Properity("ProfBonus"),
+                new Properity("Alignment"),
+                new Properity("Age"),
+                new Properity("Bonds"),
+                new Properity("Exp"),
+                new Properity("Flaws"),
+                new Properity("Height"),
+                new Properity("Ideals"),
+                new Properity("PersonalityTraits"),
+                new Properity("Initiative", ""),
+                new Properity("HPMax", "hp/total"),
             };
-
             Abilities = new List<Ability>();
             Skills = new List<Skill>();
+            //Properties = new Dictionary<string, string>()
+            //{
+            //    {"Name", "" },
+            //    {"Race", "" },
+            //    {"Background", "" },
+            //    {"ProfBonus", "" },
+            //    {"Alignment", "" },
+            //    {"Age", "" },
+            //    {"Bonds", "" },
+            //    {"Exp", "" },
+            //    {"Flaws", "" },
+            //    {"Height", "" },
+            //    {"Ideals", "" },
+            //    {"PersonalityTraits", "" },
+            //    {"ClassLevel", "" },                
+            //    {"Initiative", "" },
+            //    //{"", "" },
 
+            //};
         }
     }
 }
