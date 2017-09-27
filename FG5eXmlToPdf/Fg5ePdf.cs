@@ -19,6 +19,15 @@ namespace FG5eXmlToPDF
             var form = stamper.AcroFields;
             form.SetField("CharacterName", character.Name);
 
+            var saveCheckBoxMap = new Dictionary<string,string>()
+            {
+                { "strength", "Check Box 11" },
+                { "dexterity", "Check Box 18" },
+                { "constitution", "Check Box 19" },
+                { "intelligence", "Check Box 20" },
+                { "wisdom", "Check Box 21" },
+                { "charisma", "Check Box 22" }
+            };
             foreach (var ability in character.Abilities)
             {
                 //ability.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ability.Name);
@@ -26,9 +35,8 @@ namespace FG5eXmlToPDF
                 form.SetField(threeLetter, $"{ability.Score}");
                 form.SetField($"{threeLetter}mod", $"{ability.Bonus}");
                 form.SetField($"ST {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ability.Name)}", $"{ability.Save}");
+                form.SetField(saveCheckBoxMap[ability.Name], OnOrOff(ability.Saveprof));
             }
-
-            form.SetField("Check Box 11", OnOrOff(GetAbilityByName(character, "strength").Saveprof));
             stamper.Close();
         }
 
