@@ -10,7 +10,8 @@ namespace FG5eXmlToPdf
     {
         internal static bool StringIntToBool(string x)
         {
-            return x == "1";
+            var i = int.Parse(x);
+            return i > 0;
 
         }
 
