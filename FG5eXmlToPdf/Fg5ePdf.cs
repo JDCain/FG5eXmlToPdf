@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,16 @@ namespace FG5eXmlToPDF
             var stamper = new PdfStamper(pdfReader, new FileStream(outFile, FileMode.Create));
             var form = stamper.AcroFields;
             form.SetField("CharacterName", character.Name);
-            form.SetField("STR", $"{GetAbilityByName(character, "strength").Score}");
-            form.SetField("STRmod", $"{GetAbilityByName(character, "strength").Bonus}");
-            form.SetField("ST Strength", $"{GetAbilityByName(character, "strength").Save}");
+
+            foreach (var ability in character.Abilities)
+            {
+                //ability.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ability.Name);
+                var threeLetter = ability.Name.Substring(0, 3).ToUpper();
+                form.SetField(threeLetter, $"{ability.Score}");
+                form.SetField($"{threeLetter}mod", $"{ability.Bonus}");
+                form.SetField($"ST {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ability.Name)}", $"{ability.Save}");
+            }
+
             form.SetField("Check Box 11", OnOrOff(GetAbilityByName(character, "strength").Saveprof));
             stamper.Close();
         }
