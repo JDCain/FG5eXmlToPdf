@@ -19,7 +19,11 @@ namespace FG5eXmlToPDF
             var pdfReader = new PdfReader(template);
             var stamper = new PdfStamper(pdfReader, new FileStream(outFile, FileMode.Create));
             var form = stamper.AcroFields;
-            form.SetField("CharacterName", character.Name);
+
+            foreach (var prop in character.Properties)
+            {
+                form.SetField(prop.Key, prop.Value);
+            }
 
             var saveCheckBoxMap = new Dictionary<string,string>()
             {

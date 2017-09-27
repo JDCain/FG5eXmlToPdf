@@ -45,10 +45,15 @@
 				<score type="number">12</score>
 			</wisdom>
 		</abilities>
+		<age type="string">Age</age>
+		<alignment type="string">Alignment</alignment>
+		<appearance type="string">appearance</appearance>
+		<background type="string">Background</background>
 		<backgroundlink type="windowreference">
 			<class></class>
 			<recordname></recordname>
 		</backgroundlink>
+		<bonds type="string">bonds</bonds>
 		<classes>
 			<id-00001>
 				<casterlevelinvmult type="number">0</casterlevelinvmult>
@@ -94,6 +99,7 @@
 				<total type="number">13</total>
 			</ac>
 		</defenses>
+		<deity type="string">deity</deity>
 		<encumbrance>
 			<encumbered type="number">65</encumbered>
 			<encumberedheavy type="number">130</encumberedheavy>
@@ -148,11 +154,15 @@
 				</text>
 			</id-00003>
 		</featurelist>
+		<flaws type="string">flaws</flaws>
+		<gender type="string">Gender</gender>
+		<height type="string">Height</height>
 		<hp>
 			<temporary type="number">0</temporary>
 			<total type="number">16</total>
 			<wounds type="number">0</wounds>
 		</hp>
+		<ideals type="string">ideals</ideals>
 		<initiative>
 			<misc type="number">0</misc>
 			<temporary type="number">0</temporary>
@@ -324,8 +334,10 @@
 		</languagelist>
 		<level type="number">1</level>
 		<name type="string">Reta Bigbad</name>
+		<notes type="string">notes</notes>
 		<perception type="number">13</perception>
 		<perceptionmodifier type="number">0</perceptionmodifier>
+		<personalitytraits type="string">Personality</personalitytraits>
 		<powermeta>
 			<pactmagicslots1>
 				<max type="number">0</max>
@@ -620,5 +632,6 @@
 				<type type="number">1</type>
 			</id-00003>
 		</weaponlist>
+		<weight type="string">Weight</weight>
 	</character>
 </root>

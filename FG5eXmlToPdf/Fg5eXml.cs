@@ -15,22 +15,25 @@ using FG5eXmlToPDF.Models;
 namespace FG5eXmlToPDF
 {
     public static class Fg5eXml
-    { 
+    {
+
         public static Character5e LoadCharacter(string fileString)
         {
             var xml = XDocument.Load(fileString);
-            var name = xml?.Root?.Element("character")?.Element("name")?.Value;
-            var ab = xml?.Root?.Element("character")?.Element("abilities");
-            var dec = ab.Descendants();
-            //IEnumerable<XElement> childList =
-            //    from el in xml?.Root?.Element("character")?.Element("abilities").Elements()
-            //    select el;
-            
+            _charElement = xml?.Root?.Element("character");
+
+
+            var character = new Character5e();
+            foreach (var prop in character.Properties.ToList())
+            {
+                character.Properties[prop.Key] = GetCharValue(prop.Key);
+            }
+
+
             var abilityList = xml.Root.Element("character")?.Element("abilities").Elements().ToList();
-            var abilitys = new List<Ability>();
             foreach (var attrib in abilityList)
             {
-                abilitys.Add(new Ability()
+                character.Abilities.Add(new Ability()
                 {
                     Name = attrib.Name.ToString(),
                     Score = int.Parse(attrib.Element("score").Value),
@@ -42,10 +45,9 @@ namespace FG5eXmlToPDF
             }
 
             var skillList = xml.Root.Element("character")?.Element("skilllist").Elements().ToList();
-            var skills = new List<Skill>();
             foreach (var skill in skillList)
             {
-                skills.Add(new Skill()
+                character.Skills.Add(new Skill()
                 {
                     Name = skill.Element("name").Value,
                     Misc = int.Parse(skill.Element("misc").Value),
@@ -55,13 +57,16 @@ namespace FG5eXmlToPDF
                 });
             }
 
-            return new Character5e()
-            {
-                Name = name,
-                Abilities = abilitys,
-                Skills = skills
-            };
+            return character;
         }
 
+
+        private static XElement _charElement;
+
+        private static string GetCharValue(string name)
+        {
+            //everything is lowercase as far as I can tell in the xml
+            return _charElement.Element(name.ToLower())?.Value ?? string.Empty;
+        }
     }
 }
