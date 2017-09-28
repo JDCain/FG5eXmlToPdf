@@ -11,8 +11,8 @@ namespace FG5eXmlToPdf.Tests
         public void ReadWriteTest()
         {           
             var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            var character = Fg5eXml.LoadCharacter($@"{currentDirectory}\rita.xml");
-            Fg5ePdf.Write($@"{currentDirectory}\DnD_5E_CharacterSheet - Form Fillable.pdf", 
+            var character = FG5eXml.LoadCharacter($@"{currentDirectory}\rita.xml");
+            FG5ePdf.Write($@"{currentDirectory}\DnD_5E_CharacterSheet - Form Fillable.pdf", 
                 character,
                 $@"{currentDirectory}\out.pdf");
         }

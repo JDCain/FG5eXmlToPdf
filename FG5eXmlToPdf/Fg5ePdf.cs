@@ -12,7 +12,7 @@ using iTextSharp.text.pdf;
 
 namespace FG5eXmlToPDF
 {
-    public static class Fg5ePdf
+    public static class FG5ePdf
     {
         public static void Write(string template, Character5e character, string outFile)
         {

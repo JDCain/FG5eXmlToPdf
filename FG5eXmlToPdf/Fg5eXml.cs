@@ -15,7 +15,7 @@ using FG5eXmlToPDF.Models;
 
 namespace FG5eXmlToPDF
 {
-    public static class Fg5eXml
+    public static class FG5eXml
     {
 
         public static Character5e LoadCharacter(string fileString)
