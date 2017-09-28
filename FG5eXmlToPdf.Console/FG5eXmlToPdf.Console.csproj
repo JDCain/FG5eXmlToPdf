@@ -7,7 +7,7 @@
     <ProjectGuid>{84AD3508-7BD6-4EC9-952D-20AC428E6DDE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>FG5eXmlToPdf.Console</RootNamespace>
-    <AssemblyName>FG5eXmlToPdf</AssemblyName>
+    <AssemblyName>FG5eXmlToPdf.Console</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
