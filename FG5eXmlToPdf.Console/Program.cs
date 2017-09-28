@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FG5eXmlToPdf.Console
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
         }
     }
