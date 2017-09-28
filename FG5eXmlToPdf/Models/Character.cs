@@ -7,7 +7,6 @@ namespace FG5eXmlToPDF.Models
     {
         public List<Skill> Skills { get;  }
         public List<Ability> Abilities { get; }
-        //public Dictionary<string,string> Properties { get; }
         public List<Properity> Properities { get; } 
         public List<Class> Classes { get;  }
         public Character5e()
@@ -32,30 +31,13 @@ namespace FG5eXmlToPDF.Models
                 new Properity("HPMax", "hp/total"),
                 new Properity("Passive", "perception"),
                 new Properity("Speed", "speed/total"),
-                new Properity("Exp")
+                new Properity("Exp"),
+                new Properity("LevelTotal", "level")
             };
             Abilities = new List<Ability>();
             Skills = new List<Skill>();
             Classes = new List<Class>();
-            //Properties = new Dictionary<string, string>()
-            //{
-            //    {"Name", "" },
-            //    {"Race", "" },
-            //    {"Background", "" },
-            //    {"ProfBonus", "" },
-            //    {"Alignment", "" },
-            //    {"Age", "" },
-            //    {"Bonds", "" },
-            //    {"Exp", "" },
-            //    {"Flaws", "" },
-            //    {"Height", "" },
-            //    {"Ideals", "" },
-            //    {"PersonalityTraits", "" },
-            //    {"ClassLevel", "" },                
-            //    {"Initiative", "" },
-            //    //{"", "" },
-
-            //};
+           
         }
     }
 }
