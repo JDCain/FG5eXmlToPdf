@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,10 @@ namespace FG5eXmlToPDF
 {
     public static class FG5ePdf
     {
-        public static void Write(string template, Character5e character, string outFile)
+        public static void Write(Character5e character, string outFile)
         {
-            var pdfReader = new PdfReader(template);
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("FG5eXmlToPdf.DnD_5E_CharacterSheet - Form Fillable.pdf");
+            var pdfReader = new PdfReader(stream);
             var stamper = new PdfStamper(pdfReader, new FileStream(outFile, FileMode.Create));
             var form = stamper.AcroFields;
 
