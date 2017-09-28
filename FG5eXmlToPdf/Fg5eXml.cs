@@ -60,6 +60,18 @@ namespace FG5eXmlToPDF
                 });
             }
 
+            var classList = _charElement?.XPathSelectElement("classes").Elements().ToList();
+            foreach (var charClass in classList)
+            {
+                var x = charClass.Element("name").Value;
+                character.Classes.Add(new Class()
+                {
+                    Name = charClass.Element("name").Value,
+                    Level = charClass.Element("level").Value,
+                });
+            }
+
+
             return character;
         }
 

@@ -14,7 +14,7 @@
         public Properity(string name, string xpath = "")
         {
             Name = name;
-            XmlPath = xpath.Contains("/") ? xpath : Name.ToLower();
+            XmlPath = !string.IsNullOrEmpty(xpath) ? xpath : Name.ToLower();
         }
     }
 }

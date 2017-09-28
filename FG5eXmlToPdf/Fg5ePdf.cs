@@ -20,6 +20,17 @@ namespace FG5eXmlToPDF
             var stamper = new PdfStamper(pdfReader, new FileStream(outFile, FileMode.Create));
             var form = stamper.AcroFields;
 
+            var levels = string.Empty;
+            foreach (var charClass in character.Classes)
+            {
+                if (levels != string.Empty)
+                {
+                    levels += " / ";
+                }
+                levels += $"{charClass.Name} ({charClass.Level})";
+            }
+            form.SetField("ClassLevel", levels);
+
             foreach (var prop in character.Properities)
             {
                 form.SetField(prop.Name, prop.Value);
