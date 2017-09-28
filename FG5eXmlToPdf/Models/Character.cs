@@ -14,7 +14,7 @@ namespace FG5eXmlToPDF.Models
         {
             Properities = new List<Properity>()
             {
-                //paths are from char level
+                //Pdf Field Name, xpath from char if different than name.
                 new Properity("AC","defenses/ac/total"),
                 new Properity("Name"),
                 new Properity("Race"),
