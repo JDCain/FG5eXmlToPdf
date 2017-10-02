@@ -49,7 +49,6 @@ namespace FG5eXmlToPDF
             };
             foreach (var ability in character.Abilities)
             {
-                //ability.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ability.Name);
                 var threeLetter = ability.Name.Substring(0, 3).ToUpper();
                 form.SetField(threeLetter, $"{ability.Score}");
                 form.SetField($"{threeLetter}mod", $"{ability.Bonus}");
@@ -61,9 +60,17 @@ namespace FG5eXmlToPDF
                 form.SetField(skill.Name, $"{skill.Total}");
                 form.SetField($"{skill.Name} Check Box", Helper.BoolToYesNo(skill.Prof));
             }
+            var n = 1;
+            foreach (var weapon in character.Weapons.Take(3))
+            {
+                form.SetField($"Wpn Name{n}", weapon.Name);
+                form.SetField($"Wpn{n} AtkBonus",
+                    $"{character.Abilities.FirstOrDefault(x => x.Name == weapon.AttackStat)?.Bonus + int.Parse(weapon.AttackBonus)}");
+                form.SetField($"Wpn{n} Damage", $"{weapon.Damages[0].Dice} + {character.Abilities.FirstOrDefault(x=>x.Name == weapon.Damages[0].Stat)?.Bonus + int.Parse(weapon.Damages[0].Bonus)} {weapon.Damages[0].Type}");
+                n++;
+            }
             stamper.Close();
         }
-
 
         private static Ability GetAbilityByName(Character5e character, string abulity)
         {
