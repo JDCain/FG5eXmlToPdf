@@ -63,13 +63,41 @@ namespace FG5eXmlToPDF
             var n = 1;
             foreach (var weapon in character.Weapons.Take(3))
             {
-                form.SetField($"Wpn Name{n}", weapon.Name);
-                form.SetField($"Wpn{n} AtkBonus",
-                    $"{character.Abilities.FirstOrDefault(x => x.Name == weapon.AttackStat)?.Bonus + int.Parse(weapon.AttackBonus)}");
+                form.SetField($"Wpn{n} Name", weapon.Name);
+                var statSearch = StatSearch(weapon);
+
+                var attack = character.Abilities.FirstOrDefault(x => x.Name == statSearch)?.Bonus +
+                                 weapon.AttackBonus;
+                
+                if (weapon.Prof)
+                {
+                    if (int.TryParse(character.Properities?.FirstOrDefault(x => x.Name == "ProfBonus")?.Value, out int intOut))
+                    {
+                        attack += intOut;
+                    }
+                    
+                }
+                form.SetField($"Wpn{n} AtkBonus",$"{attack}");
+
+                
                 form.SetField($"Wpn{n} Damage", $"{weapon.Damages[0].Dice} + {character.Abilities.FirstOrDefault(x=>x.Name == weapon.Damages[0].Stat)?.Bonus + int.Parse(weapon.Damages[0].Bonus)} {weapon.Damages[0].Type}");
                 n++;
             }
             stamper.Close();
+        }
+
+        private static string StatSearch(Weapon weapon)
+        {
+            string result = null;
+            if (string.IsNullOrEmpty(weapon.AttackStat))
+            {
+                result = weapon.Type == 0 ? "strength" : "dexterity";
+            }
+            else
+            {
+                result = weapon.AttackStat;
+            }
+            return result;
         }
 
         private static Ability GetAbilityByName(Character5e character, string abulity)

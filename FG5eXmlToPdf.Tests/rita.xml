@@ -45,15 +45,12 @@
 				<score type="number">12</score>
 			</wisdom>
 		</abilities>
-		<age type="string">Age</age>
-		<alignment type="string">Alignment</alignment>
-		<appearance type="string">appearance</appearance>
-		<background type="string">Background</background>
+		<adventurelist>
+		</adventurelist>
 		<backgroundlink type="windowreference">
 			<class></class>
 			<recordname></recordname>
 		</backgroundlink>
-		<bonds type="string">bonds</bonds>
 		<classes>
 			<id-00001>
 				<casterlevelinvmult type="number">0</casterlevelinvmult>
@@ -99,7 +96,6 @@
 				<total type="number">13</total>
 			</ac>
 		</defenses>
-		<deity type="string">deity</deity>
 		<encumbrance>
 			<encumbered type="number">65</encumbered>
 			<encumberedheavy type="number">130</encumberedheavy>
@@ -154,15 +150,11 @@
 				</text>
 			</id-00003>
 		</featurelist>
-		<flaws type="string">flaws</flaws>
-		<gender type="string">Gender</gender>
-		<height type="string">Height</height>
 		<hp>
 			<temporary type="number">0</temporary>
 			<total type="number">16</total>
 			<wounds type="number">0</wounds>
 		</hp>
-		<ideals type="string">ideals</ideals>
 		<initiative>
 			<misc type="number">0</misc>
 			<temporary type="number">0</temporary>
@@ -323,6 +315,49 @@
 				<name type="string">pocketful of caterpillars</name>
 				<weight type="number">0</weight>
 			</id-00017>
+			<id-00018>
+				<ac type="number">0</ac>
+				<bonus type="number">1</bonus>
+				<carried type="number">2</carried>
+				<cost type="string">50,001 - 100,000 gp</cost>
+				<count type="number">1</count>
+				<damage type="string">2d6 slashing</damage>
+				<description type="formattedtext">
+					<h>Description</h>
+					<linklist>
+						<link class="imagewindow" recordname="image.img_luck_blade_jpg@*"><b>Image: </b></link>Luck Blade</linklist>
+						<link class="reference_spell" recordname="reference.spelldata.wish@*"><b>Spell: </b></link>Wish
+					<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you also gain a +1 bonus to saving throws.</p>
+					<p><b><i>Luck. </i></b>If the sword is on your person, you can call on its luck (no action required) to reroll one attack roll, ability check, or saving throw you dislike. You must use the second roll. This property can't be used again until the next dawn.</p>
+					<p><b><i>Wish. </i></b>The sword has 1d4 - 1 charges. While holding it, you can use an action to expend 1 charge and cast the <i>wish </i>spell from it. This property can't be used again until the next dawn. The sword loses this property if it has no charges.</p>
+				</description>
+				<isidentified type="number">1</isidentified>
+				<locked type="number">1</locked>
+				<name type="string">Greatsword Luck Blade</name>
+				<nonid_name type="string">Honed Greatsword</nonid_name>
+				<nonidentified type="string">The pommel of this fine weapon is set with three clear gemstones and is bound in fine green leather.</nonidentified>
+				<properties type="string">Heavy, two-handed, magic</properties>
+				<rarity type="string">Legendary (Requires Attunement)</rarity>
+				<spells>
+					<id-00001>
+						<link type="windowreference">
+							<class></class>
+							<recordname></recordname>
+						</link>
+						<name type="string">Luck Blade</name>
+					</id-00001>
+					<id-00002>
+						<link type="windowreference">
+							<class></class>
+							<recordname></recordname>
+						</link>
+						<name type="string">Greatsword</name>
+					</id-00002>
+				</spells>
+				<subtype type="string">Greatsword</subtype>
+				<type type="string">Weapon</type>
+				<weight type="number">6</weight>
+			</id-00018>
 		</inventorylist>
 		<languagelist>
 			<id-00001>
@@ -334,10 +369,8 @@
 		</languagelist>
 		<level type="number">1</level>
 		<name type="string">Reta Bigbad</name>
-		<notes type="string">notes</notes>
 		<perception type="number">13</perception>
 		<perceptionmodifier type="number">0</perceptionmodifier>
-		<personalitytraits type="string">Personality</personalitytraits>
 		<powermeta>
 			<pactmagicslots1>
 				<max type="number">0</max>
@@ -588,6 +621,27 @@
 			</id-00004>
 		</traitlist>
 		<weaponlist>
+			<id-00001>
+				<attackbonus type="number">1</attackbonus>
+				<carried type="number">2</carried>
+				<damagelist>
+					<id-00001>
+						<bonus type="number">1</bonus>
+						<dice type="dice">d6,d6</dice>
+						<stat type="string">base</stat>
+						<type type="string">slashing,magic</type>
+					</id-00001>
+				</damagelist>
+				<isidentified type="number">1</isidentified>
+				<maxammo type="number">0</maxammo>
+				<name type="string">Greatsword Luck Blade</name>
+				<prof type="number">1</prof>
+				<shortcut type="windowreference">
+					<class>item</class>
+					<recordname>....inventorylist.id-00018</recordname>
+				</shortcut>
+				<type type="number">0</type>
+			</id-00001>
 			<id-00002>
 				<attackbonus type="number">0</attackbonus>
 				<attackstat type="string">dexterity</attackstat>
@@ -632,6 +686,5 @@
 				<type type="number">1</type>
 			</id-00003>
 		</weaponlist>
-		<weight type="string">Weight</weight>
 	</character>
 </root>

@@ -89,8 +89,9 @@ namespace FG5eXmlToPDF
                 {
                     Name = weapon.Element("name").Value,
                     AttackStat = weapon?.Element("attackstat")?.Value ?? String.Empty,
-                    AttackBonus = weapon.Element("attackbonus").Value,
-                    Type = weapon.Element("type").Value,
+                    AttackBonus = int.Parse(weapon.Element("attackbonus").Value),
+                    Type = int.Parse(weapon.Element("type").Value),
+                    Prof = Helper.StringIntToBool(weapon.Element("prof").Value),
                     Damages = damages
                 });
             }

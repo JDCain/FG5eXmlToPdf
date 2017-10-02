@@ -7,8 +7,9 @@ namespace FG5eXmlToPDF.Models
         public string Name { get; set; }
         public List<Damage> Damages { get; set;}
         public string AttackStat { get; set; }
-        public string AttackBonus { get; set; }
-        public string Type { get; internal set; }
+        public int? AttackBonus { get; set; }
+        public int Type { get; set; }
+        public bool Prof { get; set; }
 
         public Weapon()
         {
