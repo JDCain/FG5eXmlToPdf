@@ -66,8 +66,7 @@ namespace FG5eXmlToPDF
                 form.SetField($"Wpn{n} Name", weapon.Name);
                 var statSearch = StatSearch(weapon);
 
-                var attack = character.Abilities.FirstOrDefault(x => x.Name == statSearch)?.Bonus +
-                                 weapon.AttackBonus;
+                var attack = character.Abilities.FirstOrDefault(x => x.Name == statSearch)?.Bonus +weapon.AttackBonus;
                 
                 if (weapon.Prof)
                 {
@@ -80,7 +79,7 @@ namespace FG5eXmlToPDF
                 form.SetField($"Wpn{n} AtkBonus",$"{attack}");
 
                 
-                form.SetField($"Wpn{n} Damage", $"{weapon.Damages[0].Dice} + {character.Abilities.FirstOrDefault(x=>x.Name == weapon.Damages[0].Stat)?.Bonus + int.Parse(weapon.Damages[0].Bonus)} {weapon.Damages[0].Type}");
+                form.SetField($"Wpn{n} Damage", $"{weapon.Damages[0].Dice} + {character.Abilities.FirstOrDefault(x=>x.Name == (weapon.Damages[0].Stat == "base" ? StatSearch(weapon) : weapon.Damages[0].Stat))?.Bonus + int.Parse(weapon.Damages[0].Bonus)} {weapon.Damages[0].Type}");
                 n++;
             }
             stamper.Close();

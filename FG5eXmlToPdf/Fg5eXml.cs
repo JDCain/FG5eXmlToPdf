@@ -81,7 +81,7 @@ namespace FG5eXmlToPDF
                     {
                         Type = danage.Element("type").Value,
                         Stat = danage.Element("stat").Value,
-                        Dice = danage.Element("dice").Value,
+                        Dice = GetDice(danage.Element("dice").Value),
                         Bonus = danage.Element("bonus").Value
                     });
                 }
@@ -97,6 +97,21 @@ namespace FG5eXmlToPDF
             }
 
             return character;
+        }
+
+        private static string GetDice(string diceString)
+        {
+            var result = string.Empty;
+            var array = diceString.Split(',');
+            var count = array
+                .GroupBy(e => e).ToList();
+            foreach (var dieSet in count)
+            {
+                result = string.IsNullOrEmpty(result) ? "" : result + ", ";
+                result += $"{dieSet.Count()}{dieSet.Key}";
+                
+            }
+            return result;
         }
 
 
