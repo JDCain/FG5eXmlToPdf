@@ -70,7 +70,7 @@ namespace FG5eXmlToPDF
                 
                 if (weapon.Prof)
                 {
-                    if (int.TryParse(character.Properities?.FirstOrDefault(x => x.Name == "ProfBonus")?.Value, out int intOut))
+                    if (int.TryParse(character.Properities?.FirstOrDefault(x => x.Name == "ProfBonus")?.Value, out var intOut))
                     {
                         attack += intOut;
                     }
@@ -78,8 +78,14 @@ namespace FG5eXmlToPDF
                 }
                 form.SetField($"Wpn{n} AtkBonus",$"{attack}");
 
-                
-                form.SetField($"Wpn{n} Damage", $"{weapon.Damages[0].Dice} + {character.Abilities.FirstOrDefault(x=>x.Name == (weapon.Damages[0].Stat == "base" ? StatSearch(weapon) : weapon.Damages[0].Stat))?.Bonus + int.Parse(weapon.Damages[0].Bonus)} {weapon.Damages[0].Type}");
+                var damageString = string.Empty;
+                foreach (var damage in weapon.Damages)
+                {
+                    damageString = string.IsNullOrWhiteSpace(damageString) ? "" : damageString + " & ";
+                    damageString +=
+                        $"{damage.Dice} + {character.Abilities.FirstOrDefault(x => x.Name == (damage.Stat == "base" ? StatSearch(weapon) : damage.Stat))?.Bonus + int.Parse(damage.Bonus)} {damage.Type}";
+                }
+                form.SetField($"Wpn{n} Damage", damageString);
                 n++;
             }
             stamper.Close();
