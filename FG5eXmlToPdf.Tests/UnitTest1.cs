@@ -10,14 +10,23 @@ namespace FG5eXmlToPdf.Tests
     {
         [TestMethod]
         public void ReadWriteTest()
-        {           
-            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            var character = FG5eXml.LoadCharacter($@"{currentDirectory}\rita.xml");
-            var charName = character.Properities.FirstOrDefault((x) => x.Name == "Name")?.Value;
-            var level = character.Properities.FirstOrDefault((x) => x.Name == "LevelTotal")?.Value;
-            FG5ePdf.Write( 
-                character,
-                $@"{currentDirectory}\{charName} ({level}).pdf");
+        {
+            try
+            {
+                var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+                var character = FG5eXml.LoadCharacter($@"{currentDirectory}\rita.xml");
+                var charName = character.Properities.FirstOrDefault((x) => x.Name == "Name")?.Value;
+                var level = character.Properities.FirstOrDefault((x) => x.Name == "LevelTotal")?.Value;
+                FG5ePdf.Write(
+                    character,
+                    $@"{currentDirectory}\{charName} ({level}).pdf");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
     }
 }

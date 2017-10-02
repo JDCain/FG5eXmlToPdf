@@ -9,6 +9,7 @@ namespace FG5eXmlToPDF.Models
         public List<Ability> Abilities { get; }
         public List<Properity> Properities { get; } 
         public List<Class> Classes { get;  }
+        public List<Weapon> Weapons { get; }
         public Character5e()
         {
             Properities = new List<Properity>()
@@ -37,6 +38,7 @@ namespace FG5eXmlToPDF.Models
             Abilities = new List<Ability>();
             Skills = new List<Skill>();
             Classes = new List<Class>();
+            Weapons = new List<Weapon>();
            
         }
     }

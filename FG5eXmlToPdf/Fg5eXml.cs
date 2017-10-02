@@ -63,7 +63,6 @@ namespace FG5eXmlToPDF
             var classList = _charElement?.XPathSelectElement("classes").Elements().ToList();
             foreach (var charClass in classList)
             {
-                var x = charClass.Element("name").Value;
                 character.Classes.Add(new Class()
                 {
                     Name = charClass.Element("name").Value,
@@ -71,6 +70,30 @@ namespace FG5eXmlToPDF
                 });
             }
 
+            var weaponList = _charElement?.XPathSelectElement("weaponlist").Elements().ToList();
+            foreach (var weapon in weaponList)
+            {
+                var damageList = weapon.Element("damagelist").Elements().ToList();
+                var damages = new List<Damage>();
+                foreach (var danage in damageList)
+                {
+                    damages.Add(new Damage()
+                    {
+                        Type = danage.Element("type").Value,
+                        Stat = danage.Element("stat").Value,
+                        Dice = danage.Element("dice").Value,
+                        Bonus = danage.Element("bonus").Value
+                    });
+                }
+                character.Weapons.Add(new Weapon()
+                {
+                    Name = weapon.Element("name").Value,
+                    AttackStat = weapon?.Element("attackstat")?.Value ?? String.Empty,
+                    AttackBonus = weapon.Element("attackbonus").Value,
+                    Type = weapon.Element("type").Value,
+                    Damages = damages
+                });
+            }
 
             return character;
         }

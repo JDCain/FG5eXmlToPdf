@@ -51,11 +51,13 @@
     <Compile Include="Fg5eXml.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Models\Ability.cs" />
-    <Compile Include="Models\Character.cs" />
     <Compile Include="Fg5ePdf.cs" />
+    <Compile Include="Models\Character5e.cs" />
     <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\Damage.cs" />
     <Compile Include="Models\Properity.cs" />
     <Compile Include="Models\Skill.cs" />
+    <Compile Include="Models\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
