@@ -47,10 +47,13 @@
 		</abilities>
 		<adventurelist>
 		</adventurelist>
+		<alignment type="string">Neutral Evil</alignment>
+		<appearance type="string">Apperance</appearance>
 		<backgroundlink type="windowreference">
 			<class></class>
 			<recordname></recordname>
 		</backgroundlink>
+		<bonds type="string">Bonds</bonds>
 		<classes>
 			<id-00001>
 				<casterlevelinvmult type="number">0</casterlevelinvmult>
@@ -100,11 +103,12 @@
 			<encumbered type="number">65</encumbered>
 			<encumberedheavy type="number">130</encumberedheavy>
 			<liftpushdrag type="number">390</liftpushdrag>
-			<load type="number">18</load>
+			<load type="number">27</load>
 			<max type="number">195</max>
 		</encumbrance>
 		<exp type="number">0</exp>
 		<expneeded type="number">0</expneeded>
+		<faction type="string">Licktoad Tribe</faction>
 		<featlist>
 		</featlist>
 		<featurelist>
@@ -150,11 +154,16 @@
 				</text>
 			</id-00003>
 		</featurelist>
+		<flaws type="string">Flaws</flaws>
+		<gender type="string">F</gender>
 		<hp>
+			<deathsavefail type="number">0</deathsavefail>
+			<deathsavesuccess type="number">0</deathsavesuccess>
 			<temporary type="number">0</temporary>
 			<total type="number">16</total>
 			<wounds type="number">0</wounds>
 		</hp>
+		<ideals type="string">Ideals</ideals>
 		<initiative>
 			<misc type="number">0</misc>
 			<temporary type="number">0</temporary>
@@ -235,7 +244,7 @@
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">jar of pickled hal&#239;ing toes just aboutf ready for eating (equivalent to 1 days trail rations)</name>
+				<name type="string">jar of pickled hal&#239;ing toes just about ready for eating (equivalent to 1 days trail rations)</name>
 				<weight type="number">0</weight>
 			</id-00006>
 			<id-00007>
@@ -414,8 +423,10 @@
 		</languagelist>
 		<level type="number">1</level>
 		<name type="string">Reta Bigbad</name>
+		<notes type="string">Notes</notes>
 		<perception type="number">13</perception>
 		<perceptionmodifier type="number">0</perceptionmodifier>
+		<personalitytraits type="string">Reta likes to torment small, harmless animals and usually has a pocket full of such creatures in case she gets bored. She finds it hard not to shout when she speaks, and loves taking risks in combat to scare her enemies.</personalitytraits>
 		<powermeta>
 			<pactmagicslots1>
 				<max type="number">0</max>
@@ -666,33 +677,6 @@
 			</id-00004>
 		</traitlist>
 		<weaponlist>
-			<id-00001>
-				<attackbonus type="number">1</attackbonus>
-				<carried type="number">2</carried>
-				<damagelist>
-					<id-00001>
-						<bonus type="number">1</bonus>
-						<dice type="dice">d6,d6</dice>
-						<stat type="string">base</stat>
-						<type type="string">slashing,magic</type>
-					</id-00001>
-					<id-00002>
-						<bonus type="number">0</bonus>
-						<dice type="dice">d6</dice>
-						<stat type="string">base</stat>
-						<type type="string">fire</type>
-					</id-00002>
-				</damagelist>
-				<isidentified type="number">1</isidentified>
-				<maxammo type="number">0</maxammo>
-				<name type="string">Greatsword Luck Blade</name>
-				<prof type="number">1</prof>
-				<shortcut type="windowreference">
-					<class>item</class>
-					<recordname>....inventorylist.id-00018</recordname>
-				</shortcut>
-				<type type="number">0</type>
-			</id-00001>
 			<id-00002>
 				<attackbonus type="number">0</attackbonus>
 				<attackstat type="string">dexterity</attackstat>
