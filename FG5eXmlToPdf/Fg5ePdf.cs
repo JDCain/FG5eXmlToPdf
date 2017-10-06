@@ -37,6 +37,7 @@ namespace FG5eXmlToPDF
             {
                 form.SetField(prop.Name, prop.Value);
             }
+            form.SetField("CharacterName 2", character.Properities.FirstOrDefault(x => x.Name == "Name")?.Value);
 
             var saveCheckBoxMap = new Dictionary<string,string>()
             {

@@ -44,6 +44,11 @@ namespace FG5eXmlToPDF.Models
                 new Properity("Ideals"),
                 new Properity("Bonds"),
                 new Properity("Flaws"),
+                new Properity("FactionName", "faction"),
+                new Properity("Age"),
+                new Properity("Height"),
+                new Properity("Weight"),
+
             };
             Abilities = new List<Ability>();
             Skills = new List<Skill>();

@@ -47,6 +47,7 @@
 		</abilities>
 		<adventurelist>
 		</adventurelist>
+		<age type="string">15</age>
 		<alignment type="string">Neutral Evil</alignment>
 		<appearance type="string">Apperance</appearance>
 		<backgroundlink type="windowreference">
@@ -144,6 +145,7 @@
 		</featurelist>
 		<flaws type="string">She finds it hard not to shout when she speaks, and loves taking risks in combat to scare her enemies.</flaws>
 		<gender type="string">F</gender>
+		<height type="string">2ft</height>
 		<hp>
 			<deathsavefail type="number">0</deathsavefail>
 			<deathsavesuccess type="number">0</deathsavesuccess>
@@ -626,5 +628,6 @@
 				<type type="number">1</type>
 			</id-00003>
 		</weaponlist>
+		<weight type="string">???</weight>
 	</character>
 </root>
