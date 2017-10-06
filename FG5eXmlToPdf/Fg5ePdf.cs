@@ -96,13 +96,17 @@ namespace FG5eXmlToPDF
             form.SetField("Features and Traits", featuresTraits);
             var feats = GenericItemListToTextBox("Feats", character.Features, Environment.NewLine);
             form.SetField("Feat+Traits", feats);
+            var y = string.Empty;
+            var inventory =
+                character.Inventory.Aggregate(y, (current, item) => current + $"{item.Name} ({item.Text}), ");
+            form.SetField("Equipment", inventory.Trim().TrimEnd(','));
             stamper.Close();
         }
 
         public static string GenericItemListToTextBox(string title, List<GenericItem> list, string seperator)
         {
             var result = $"[{title}]{Environment.NewLine}";
-            list.ForEach(x=> result += $"{x.Name}: {x.Text}");
+            list.ForEach(x=> result += $"{x.Name}: {x.Text}{seperator}");
             return result;
         }
 

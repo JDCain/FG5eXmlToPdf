@@ -103,7 +103,7 @@
 			<encumbered type="number">65</encumbered>
 			<encumberedheavy type="number">130</encumberedheavy>
 			<liftpushdrag type="number">390</liftpushdrag>
-			<load type="number">27</load>
+			<load type="number">18</load>
 			<max type="number">195</max>
 		</encumbrance>
 		<exp type="number">0</exp>
@@ -317,89 +317,6 @@
 				<name type="string">pocketful of caterpillars</name>
 				<weight type="number">0</weight>
 			</id-00017>
-			<id-00018>
-				<ac type="number">0</ac>
-				<bonus type="number">1</bonus>
-				<carried type="number">2</carried>
-				<cost type="string">50,001 - 100,000 gp</cost>
-				<count type="number">1</count>
-				<damage type="string">2d6 slashing</damage>
-				<description type="formattedtext">
-					<h>Description</h>
-					<linklist>
-						<link class="imagewindow" recordname="image.img_luck_blade_jpg@*"><b>Image: </b></link>Luck Blade</linklist>
-						<link class="reference_spell" recordname="reference.spelldata.wish@*"><b>Spell: </b></link>Wish
-					<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you also gain a +1 bonus to saving throws.</p>
-					<p><b><i>Luck. </i></b>If the sword is on your person, you can call on its luck (no action required) to reroll one attack roll, ability check, or saving throw you dislike. You must use the second roll. This property can't be used again until the next dawn.</p>
-					<p><b><i>Wish. </i></b>The sword has 1d4 - 1 charges. While holding it, you can use an action to expend 1 charge and cast the <i>wish </i>spell from it. This property can't be used again until the next dawn. The sword loses this property if it has no charges.</p>
-				</description>
-				<isidentified type="number">1</isidentified>
-				<locked type="number">0</locked>
-				<name type="string">Greatsword Luck Blade</name>
-				<nonid_name type="string">Honed Greatsword</nonid_name>
-				<nonidentified type="string">The pommel of this fine weapon is set with three clear gemstones and is bound in fine green leather.</nonidentified>
-				<properties type="string">Heavy, two-handed, magic</properties>
-				<rarity type="string">Legendary (Requires Attunement)</rarity>
-				<spells>
-					<id-00001>
-						<link type="windowreference">
-							<class></class>
-							<recordname></recordname>
-						</link>
-						<name type="string">Luck Blade</name>
-					</id-00001>
-					<id-00002>
-						<link type="windowreference">
-							<class></class>
-							<recordname></recordname>
-						</link>
-						<name type="string">Greatsword</name>
-					</id-00002>
-				</spells>
-				<subtype type="string">Greatsword</subtype>
-				<type type="string">Weapon</type>
-				<weight type="number">6</weight>
-			</id-00018>
-			<id-00019>
-				<ac type="number">0</ac>
-				<bonus type="number">0</bonus>
-				<carried type="number">2</carried>
-				<cost type="string">501 - 5,000 gp</cost>
-				<count type="number">1</count>
-				<damage type="string">1d8 slashing</damage>
-				<description type="formattedtext">
-					<h>Description</h>
-					<linklist>
-						<link class="imagewindow" recordname="image.img_flametongue_longsword_jpg@*"><b>Image: </b></link>Flame Tongue</linklist>
-					<p>You can use a bonus action to speak this magic sword's command word, causing flames to erupt from the blade. These flames shed bright light in a 40-foot radius and dim light for an additional 40 feet. While the sword is ablaze, it deals an extra 2d6 fire damage to any target it hits. The flames last until you use a bonus action to speak the command word again or until you drop or sheathe the sword.</p>
-				</description>
-				<isidentified type="number">1</isidentified>
-				<locked type="number">1</locked>
-				<name type="string">Longsword Flame Tongue</name>
-				<nonid_name type="string">Coruscated Longsword</nonid_name>
-				<nonidentified type="string">A deep red gemstone has been set into the rain guard of this beautifully made weapon. Stylised flames have been etched along the length of the blade.</nonidentified>
-				<properties type="string">Versatile (1d10), magic</properties>
-				<rarity type="string">Rare (Requires Attunement)</rarity>
-				<spells>
-					<id-00001>
-						<link type="windowreference">
-							<class></class>
-							<recordname></recordname>
-						</link>
-						<name type="string">Flame Tongue</name>
-					</id-00001>
-					<id-00002>
-						<link type="windowreference">
-							<class></class>
-							<recordname></recordname>
-						</link>
-						<name type="string">Longsword</name>
-					</id-00002>
-				</spells>
-				<subtype type="string">Longsword</subtype>
-				<type type="string">Weapon</type>
-				<weight type="number">3</weight>
-			</id-00019>
 		</inventorylist>
 		<languagelist>
 			<id-00001>

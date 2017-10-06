@@ -127,6 +127,16 @@ namespace FG5eXmlToPDF
                 character.Features.Add(GenericItemMaker(features));
             }
 
+            var inventoryList = _charElement?.XPathSelectElement("inventorylist").Elements().ToList();
+            foreach (var item in inventoryList)
+            {
+                character.Inventory.Add(new GenericItem()
+                {
+                    Name = item.Element("name").Value,
+                    Text = item.Element("count").Value
+                });
+            }
+
             return character;
         }
 
