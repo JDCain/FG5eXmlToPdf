@@ -118,19 +118,7 @@
 				<name type="string">Dueling Fighting Style</name>
 				<source type="string">Fighter</source>
 				<text type="formattedtext">
-					<p>You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>
-					<p><b>Archery</b></p>
-					<p>You gain a +2 bonus to attack rolls you make with ranged weapons.</p>
-					<p><b>Defense</b></p>
-					<p>While you are wearing armor, you gain a +1 bonus to AC.</p>
-					<p><b>Dueling</b></p>
 					<p>When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.</p>
-					<p><b>Great Weapon Fighting</b></p>
-					<p>When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.</p>
-					<p><b>Protection</b></p>
-					<p>When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.</p>
-					<p><b>Two-Weapon Fighting</b></p>
-					<p>When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.</p>
 				</text>
 			</id-00001>
 			<id-00002>
@@ -154,7 +142,7 @@
 				</text>
 			</id-00003>
 		</featurelist>
-		<flaws type="string">Flaws</flaws>
+		<flaws type="string">She finds it hard not to shout when she speaks, and loves taking risks in combat to scare her enemies.</flaws>
 		<gender type="string">F</gender>
 		<hp>
 			<deathsavefail type="number">0</deathsavefail>
@@ -426,7 +414,7 @@
 		<notes type="string">Notes</notes>
 		<perception type="number">13</perception>
 		<perceptionmodifier type="number">0</perceptionmodifier>
-		<personalitytraits type="string">Reta likes to torment small, harmless animals and usually has a pocket full of such creatures in case she gets bored. She finds it hard not to shout when she speaks, and loves taking risks in combat to scare her enemies.</personalitytraits>
+		<personalitytraits type="string">Reta likes to torment small, harmless animals and usually has a pocket full of such creatures in case she gets bored. </personalitytraits>
 		<powermeta>
 			<pactmagicslots1>
 				<max type="number">0</max>

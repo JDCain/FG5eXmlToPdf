@@ -55,6 +55,7 @@
     <Compile Include="Models\Character5e.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Damage.cs" />
+    <Compile Include="Models\GenericItem.cs" />
     <Compile Include="Models\Properity.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\Weapon.cs" />

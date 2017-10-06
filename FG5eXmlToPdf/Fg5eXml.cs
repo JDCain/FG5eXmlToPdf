@@ -96,7 +96,53 @@ namespace FG5eXmlToPDF
                 });
             }
 
+            var proficiencyList = _charElement?.XPathSelectElement("proficiencylist").Elements().ToList();
+            foreach (var proficiency in proficiencyList)
+            {
+               character.Proficiencies.Add(proficiency.Value);
+            }
+
+            var languageList = _charElement?.XPathSelectElement("languagelist").Elements().ToList();
+            foreach (var language in languageList)
+            {
+                character.Languages.Add(language.Value);
+            }
+
+            var traitList = _charElement?.XPathSelectElement("traitlist").Elements().ToList();
+            traitList.ForEach(x => character.Traits.Add(GenericItemMaker(x)));
+            //foreach (var trait in traitList)
+            //{
+            //    character.Traits.Add(GenericItemMaker(trait));
+            //}
+
+            var featList = _charElement?.XPathSelectElement("featlist").Elements().ToList();
+            foreach (var feat in featList)
+            {
+                character.Feats.Add(GenericItemMaker(feat));
+            }
+
+            var featuresList = _charElement?.XPathSelectElement("featurelist").Elements().ToList();
+            foreach (var features in featuresList)
+            {
+                character.Features.Add(GenericItemMaker(features));
+            }
+
             return character;
+        }
+
+        private static GenericItem GenericItemMaker(XElement features)
+        {
+            var text = string.Empty;
+            foreach (var line in features.Element("text").Elements().ToList())
+            {
+                text += line.Value + Environment.NewLine;
+            }
+
+            return new GenericItem()
+            {
+                Name = features.Element("name").Value,
+                Text = text,
+            };
         }
 
         private static string GetDice(string diceString)

@@ -7,7 +7,12 @@ namespace FG5eXmlToPDF.Models
     {
         public List<Skill> Skills { get;  }
         public List<Ability> Abilities { get; }
-        public List<Properity> Properities { get; } 
+        public List<Properity> Properities { get; }
+        public List<string> Proficiencies { get; }
+        public List<string> Languages { get; }
+        public List<GenericItem> Traits { get; }
+        public List<GenericItem> Feats { get; }
+        public List<GenericItem> Features { get;}
         public List<Class> Classes { get;  }
         public List<Weapon> Weapons { get; }
         public Character5e()
@@ -33,13 +38,21 @@ namespace FG5eXmlToPDF.Models
                 new Properity("Passive", "perception"),
                 new Properity("Speed", "speed/total"),
                 new Properity("Exp"),
-                new Properity("LevelTotal", "level")
+                new Properity("LevelTotal", "level"),
+                new Properity("PersonalityTraits"),
+                new Properity("Ideals"),
+                new Properity("Bonds"),
+                new Properity("Flaws"),
             };
             Abilities = new List<Ability>();
             Skills = new List<Skill>();
             Classes = new List<Class>();
             Weapons = new List<Weapon>();
-           
+            Proficiencies = new List<string>();
+            Languages = new List<string>();
+            Traits = new List<GenericItem>();
+            Feats = new List<GenericItem>();
+            Features = new List<GenericItem>();
         }
     }
 }
