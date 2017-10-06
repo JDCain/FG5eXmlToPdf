@@ -37,6 +37,7 @@ namespace FG5eXmlToPDF
             {
                 form.SetField(prop.Name, prop.Value);
             }
+            form.SetField("CharacterName 2", character.Properities.FirstOrDefault(x => x.Name == "Name")?.Value);
 
             var saveCheckBoxMap = new Dictionary<string,string>()
             {
@@ -87,8 +88,33 @@ namespace FG5eXmlToPDF
                 }
                 form.SetField($"Wpn{n} Damage", damageString);
                 n++;
+
+
             }
+            var proficienciesLang = MakeTextBlock("Proficiencies", character.Proficiencies, Environment.NewLine) + MakeTextBlock("Languages", character.Languages, ", " );
+            form.SetField("ProficienciesLang", proficienciesLang.Trim().TrimEnd(','));
+            var featuresTraits = GenericItemListToTextBox("Features", character.Features, Environment.NewLine) + GenericItemListToTextBox("Traits", character.Traits, Environment.NewLine);
+            form.SetField("Features and Traits", featuresTraits);
+            var feats = GenericItemListToTextBox("Feats", character.Features, Environment.NewLine);
+            form.SetField("Feat+Traits", feats);
+            var y = string.Empty;
+            var inventory =
+                character.Inventory.Aggregate(y, (current, item) => current + $"{item.Name} ({item.Text}), ");
+            form.SetField("Equipment", inventory.Trim().TrimEnd(','));
             stamper.Close();
+        }
+
+        public static string GenericItemListToTextBox(string title, List<GenericItem> list, string seperator)
+        {
+            var result = $"[{title}]{Environment.NewLine}";
+            list.ForEach(x=> result += $"{x.Name}: {x.Text}{seperator}");
+            return result;
+        }
+
+        public static string MakeTextBlock(string title, IEnumerable<string> list, string seperator)
+        {
+            var result = $"[{title}]{Environment.NewLine}";
+            return list.Aggregate(result, (current, item) => current + (item + seperator));
         }
 
         private static string StatSearch(Weapon weapon)
