@@ -47,10 +47,14 @@
 		</abilities>
 		<adventurelist>
 		</adventurelist>
+		<age type="string">15</age>
+		<alignment type="string">Neutral Evil</alignment>
+		<appearance type="string">Apperance</appearance>
 		<backgroundlink type="windowreference">
 			<class></class>
 			<recordname></recordname>
 		</backgroundlink>
+		<bonds type="string">Bonds</bonds>
 		<classes>
 			<id-00001>
 				<casterlevelinvmult type="number">0</casterlevelinvmult>
@@ -105,6 +109,7 @@
 		</encumbrance>
 		<exp type="number">0</exp>
 		<expneeded type="number">0</expneeded>
+		<faction type="string">Licktoad Tribe</faction>
 		<featlist>
 		</featlist>
 		<featurelist>
@@ -114,19 +119,7 @@
 				<name type="string">Dueling Fighting Style</name>
 				<source type="string">Fighter</source>
 				<text type="formattedtext">
-					<p>You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>
-					<p><b>Archery</b></p>
-					<p>You gain a +2 bonus to attack rolls you make with ranged weapons.</p>
-					<p><b>Defense</b></p>
-					<p>While you are wearing armor, you gain a +1 bonus to AC.</p>
-					<p><b>Dueling</b></p>
 					<p>When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.</p>
-					<p><b>Great Weapon Fighting</b></p>
-					<p>When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.</p>
-					<p><b>Protection</b></p>
-					<p>When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.</p>
-					<p><b>Two-Weapon Fighting</b></p>
-					<p>When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.</p>
 				</text>
 			</id-00001>
 			<id-00002>
@@ -150,11 +143,17 @@
 				</text>
 			</id-00003>
 		</featurelist>
+		<flaws type="string">She finds it hard not to shout when she speaks, and loves taking risks in combat to scare her enemies.</flaws>
+		<gender type="string">F</gender>
+		<height type="string">2ft</height>
 		<hp>
+			<deathsavefail type="number">0</deathsavefail>
+			<deathsavesuccess type="number">0</deathsavesuccess>
 			<temporary type="number">0</temporary>
 			<total type="number">16</total>
 			<wounds type="number">0</wounds>
 		</hp>
+		<ideals type="string">Ideals</ideals>
 		<initiative>
 			<misc type="number">0</misc>
 			<temporary type="number">0</temporary>
@@ -235,7 +234,7 @@
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">jar of pickled hal&#239;ing toes just aboutf ready for eating (equivalent to 1 days trail rations)</name>
+				<name type="string">jar of pickled hal&#239;ing toes just about ready for eating (equivalent to 1 days trail rations)</name>
 				<weight type="number">0</weight>
 			</id-00006>
 			<id-00007>
@@ -320,89 +319,6 @@
 				<name type="string">pocketful of caterpillars</name>
 				<weight type="number">0</weight>
 			</id-00017>
-			<id-00018>
-				<ac type="number">0</ac>
-				<bonus type="number">1</bonus>
-				<carried type="number">2</carried>
-				<cost type="string">50,001 - 100,000 gp</cost>
-				<count type="number">1</count>
-				<damage type="string">2d6 slashing</damage>
-				<description type="formattedtext">
-					<h>Description</h>
-					<linklist>
-						<link class="imagewindow" recordname="image.img_luck_blade_jpg@*"><b>Image: </b></link>Luck Blade</linklist>
-						<link class="reference_spell" recordname="reference.spelldata.wish@*"><b>Spell: </b></link>Wish
-					<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you also gain a +1 bonus to saving throws.</p>
-					<p><b><i>Luck. </i></b>If the sword is on your person, you can call on its luck (no action required) to reroll one attack roll, ability check, or saving throw you dislike. You must use the second roll. This property can't be used again until the next dawn.</p>
-					<p><b><i>Wish. </i></b>The sword has 1d4 - 1 charges. While holding it, you can use an action to expend 1 charge and cast the <i>wish </i>spell from it. This property can't be used again until the next dawn. The sword loses this property if it has no charges.</p>
-				</description>
-				<isidentified type="number">1</isidentified>
-				<locked type="number">0</locked>
-				<name type="string">Greatsword Luck Blade</name>
-				<nonid_name type="string">Honed Greatsword</nonid_name>
-				<nonidentified type="string">The pommel of this fine weapon is set with three clear gemstones and is bound in fine green leather.</nonidentified>
-				<properties type="string">Heavy, two-handed, magic</properties>
-				<rarity type="string">Legendary (Requires Attunement)</rarity>
-				<spells>
-					<id-00001>
-						<link type="windowreference">
-							<class></class>
-							<recordname></recordname>
-						</link>
-						<name type="string">Luck Blade</name>
-					</id-00001>
-					<id-00002>
-						<link type="windowreference">
-							<class></class>
-							<recordname></recordname>
-						</link>
-						<name type="string">Greatsword</name>
-					</id-00002>
-				</spells>
-				<subtype type="string">Greatsword</subtype>
-				<type type="string">Weapon</type>
-				<weight type="number">6</weight>
-			</id-00018>
-			<id-00019>
-				<ac type="number">0</ac>
-				<bonus type="number">0</bonus>
-				<carried type="number">2</carried>
-				<cost type="string">501 - 5,000 gp</cost>
-				<count type="number">1</count>
-				<damage type="string">1d8 slashing</damage>
-				<description type="formattedtext">
-					<h>Description</h>
-					<linklist>
-						<link class="imagewindow" recordname="image.img_flametongue_longsword_jpg@*"><b>Image: </b></link>Flame Tongue</linklist>
-					<p>You can use a bonus action to speak this magic sword's command word, causing flames to erupt from the blade. These flames shed bright light in a 40-foot radius and dim light for an additional 40 feet. While the sword is ablaze, it deals an extra 2d6 fire damage to any target it hits. The flames last until you use a bonus action to speak the command word again or until you drop or sheathe the sword.</p>
-				</description>
-				<isidentified type="number">1</isidentified>
-				<locked type="number">1</locked>
-				<name type="string">Longsword Flame Tongue</name>
-				<nonid_name type="string">Coruscated Longsword</nonid_name>
-				<nonidentified type="string">A deep red gemstone has been set into the rain guard of this beautifully made weapon. Stylised flames have been etched along the length of the blade.</nonidentified>
-				<properties type="string">Versatile (1d10), magic</properties>
-				<rarity type="string">Rare (Requires Attunement)</rarity>
-				<spells>
-					<id-00001>
-						<link type="windowreference">
-							<class></class>
-							<recordname></recordname>
-						</link>
-						<name type="string">Flame Tongue</name>
-					</id-00001>
-					<id-00002>
-						<link type="windowreference">
-							<class></class>
-							<recordname></recordname>
-						</link>
-						<name type="string">Longsword</name>
-					</id-00002>
-				</spells>
-				<subtype type="string">Longsword</subtype>
-				<type type="string">Weapon</type>
-				<weight type="number">3</weight>
-			</id-00019>
 		</inventorylist>
 		<languagelist>
 			<id-00001>
@@ -414,8 +330,10 @@
 		</languagelist>
 		<level type="number">1</level>
 		<name type="string">Reta Bigbad</name>
+		<notes type="string">Notes</notes>
 		<perception type="number">13</perception>
 		<perceptionmodifier type="number">0</perceptionmodifier>
+		<personalitytraits type="string">Reta likes to torment small, harmless animals and usually has a pocket full of such creatures in case she gets bored. </personalitytraits>
 		<powermeta>
 			<pactmagicslots1>
 				<max type="number">0</max>
@@ -666,33 +584,6 @@
 			</id-00004>
 		</traitlist>
 		<weaponlist>
-			<id-00001>
-				<attackbonus type="number">1</attackbonus>
-				<carried type="number">2</carried>
-				<damagelist>
-					<id-00001>
-						<bonus type="number">1</bonus>
-						<dice type="dice">d6,d6</dice>
-						<stat type="string">base</stat>
-						<type type="string">slashing,magic</type>
-					</id-00001>
-					<id-00002>
-						<bonus type="number">0</bonus>
-						<dice type="dice">d6</dice>
-						<stat type="string">base</stat>
-						<type type="string">fire</type>
-					</id-00002>
-				</damagelist>
-				<isidentified type="number">1</isidentified>
-				<maxammo type="number">0</maxammo>
-				<name type="string">Greatsword Luck Blade</name>
-				<prof type="number">1</prof>
-				<shortcut type="windowreference">
-					<class>item</class>
-					<recordname>....inventorylist.id-00018</recordname>
-				</shortcut>
-				<type type="number">0</type>
-			</id-00001>
 			<id-00002>
 				<attackbonus type="number">0</attackbonus>
 				<attackstat type="string">dexterity</attackstat>
@@ -737,5 +628,6 @@
 				<type type="number">1</type>
 			</id-00003>
 		</weaponlist>
+		<weight type="string">???</weight>
 	</character>
 </root>
