@@ -103,7 +103,9 @@ namespace FG5eXmlToPDF
                 character.Inventory.Aggregate(y, (current, item) => current + $"{item.Name} ({item.Text}), ");
             form.SetField("Equipment", inventory.Trim().TrimEnd(','));
 
-            form.SetField("Text1", GenericItemListToTextBox("Features", character.Features, Environment.NewLine) + GenericItemListToTextBox("Traits", character.Traits, Environment.NewLine) + GenericItemListToTextBox("Feats", character.Features, Environment.NewLine));
+            form.SetField("Text1", GenericItemListToTextBox("Features", character.Features, Environment.NewLine) 
+                + GenericItemListToTextBox("Traits", character.Traits, Environment.NewLine) 
+                + GenericItemListToTextBox("Feats", character.Features, Environment.NewLine));
            
             stamper.Close();
         }
