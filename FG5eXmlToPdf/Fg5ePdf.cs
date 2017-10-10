@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FG5eXmlToPdf;
 using FG5eXmlToPDF.Models;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 
 namespace FG5eXmlToPDF
@@ -93,21 +94,31 @@ namespace FG5eXmlToPDF
             }
             var proficienciesLang = MakeTextBlock("Proficiencies", character.Proficiencies, Environment.NewLine) + MakeTextBlock("Languages", character.Languages, ", " );
             form.SetField("ProficienciesLang", proficienciesLang.Trim().TrimEnd(','));
-            var featuresTraits = GenericItemListToTextBox("Features", character.Features, Environment.NewLine) + GenericItemListToTextBox("Traits", character.Traits, Environment.NewLine);
+            var featuresTraits = GenericItemListToTitles("Features", character.Features, Environment.NewLine) + GenericItemListToTitles("Traits", character.Traits, Environment.NewLine);
             form.SetField("Features and Traits", featuresTraits);
-            var feats = GenericItemListToTextBox("Feats", character.Features, Environment.NewLine);
+            var feats = GenericItemListToTitles("Feats", character.Features, Environment.NewLine);
             form.SetField("Feat+Traits", feats);
             var y = string.Empty;
             var inventory =
                 character.Inventory.Aggregate(y, (current, item) => current + $"{item.Name} ({item.Text}), ");
             form.SetField("Equipment", inventory.Trim().TrimEnd(','));
+
+            form.SetField("Text1", GenericItemListToTextBox("Features", character.Features, Environment.NewLine) + GenericItemListToTextBox("Traits", character.Traits, Environment.NewLine) + GenericItemListToTextBox("Feats", character.Features, Environment.NewLine));
+           
             stamper.Close();
+        }
+
+        public static string GenericItemListToTitles(string title, List<GenericItem> list, string seperator)
+        {
+            var result = $"[{title}]{Environment.NewLine}";
+            list.ForEach(x=> result += $"{x.Name}{seperator}");
+            return result;
         }
 
         public static string GenericItemListToTextBox(string title, List<GenericItem> list, string seperator)
         {
             var result = $"[{title}]{Environment.NewLine}";
-            list.ForEach(x=> result += $"{x.Name}: {x.Text}{seperator}");
+            list.ForEach(x => result += $"{x.Name}: {x.Text}{seperator}");
             return result;
         }
 
