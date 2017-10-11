@@ -1,16 +1,12 @@
-﻿using System;
+﻿using FG5eXmlToPdf;
+using FG5eXmlToPDF.Models;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using FG5eXmlToPdf;
-using FG5eXmlToPDF.Models;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 
 namespace FG5eXmlToPDF
 {
@@ -23,62 +19,75 @@ namespace FG5eXmlToPDF
             var stamper = new PdfStamper(pdfReader, new FileStream(outFile, FileMode.Create));
             var form = stamper.AcroFields;
 
-            var levels = string.Empty;
-            foreach (var charClass in character.Classes)
-            {
-                if (levels != string.Empty)
-                {
-                    levels += " / ";
-                }
-                levels += $"{charClass.Name} ({charClass.Level})";
-            }
+            var levels = GetLevels(character);
             form.SetField("ClassLevel", levels);
 
-            foreach (var prop in character.Properities)
-            {
-                form.SetField(prop.Name, prop.Value);
-            }
-            form.SetField("CharacterName 2", character.Properities.FirstOrDefault(x => x.Name == "Name")?.Value);
+            SetProperties(character, form);
+            SetAbulities(character, form);
+            SetSkills(character, form);
+            SetWeapons(character, form);
+            SetProfLang(character, form);
+            SetFeatureTraits(character, form);
+            SetFeats(character, form);
+            SetEquipment(character, form);
+            SetDetail(character, form);
 
-            var saveCheckBoxMap = new Dictionary<string,string>()
-            {
-                { "strength", "Check Box 11" },
-                { "dexterity", "Check Box 18" },
-                { "constitution", "Check Box 19" },
-                { "intelligence", "Check Box 20" },
-                { "wisdom", "Check Box 21" },
-                { "charisma", "Check Box 22" }
-            };
-            foreach (var ability in character.Abilities)
-            {
-                var threeLetter = ability.Name.Substring(0, 3).ToUpper();
-                form.SetField(threeLetter, $"{ability.Score}");
-                form.SetField($"{threeLetter}mod", $"{ability.Bonus}");
-                form.SetField($"ST {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ability.Name)}", $"{ability.Save}");
-                form.SetField(saveCheckBoxMap[ability.Name], Helper.BoolToYesNo(ability.Saveprof));
-            }
-            foreach (var skill in character.Skills)
-            {
-                form.SetField(skill.Name, $"{skill.Total}");
-                form.SetField($"{skill.Name} Check Box", Helper.BoolToYesNo(skill.Prof));
-            }
+            stamper.Close();
+        }
+
+        private static void SetDetail(ICharacter character, AcroFields form)
+        {
+            form.SetField("Text1", GenericItemListToTextBox("Features", character.Features, Environment.NewLine)
+                                   + GenericItemListToTextBox("Traits", character.Traits, Environment.NewLine)
+                                   + GenericItemListToTextBox("Feats", character.Features, Environment.NewLine));
+        }
+
+        private static void SetEquipment(ICharacter character, AcroFields form)
+        {
+            var y = string.Empty;
+            var inventory =
+                character.Inventory.Aggregate(y, (current, item) => current + $"{item.Name} ({item.Text}), ");
+            form.SetField("Equipment", inventory.Trim().TrimEnd(','));
+        }
+
+        private static void SetFeats(ICharacter character, AcroFields form)
+        {
+            var feats = GenericItemListToTitles("Feats", character.Features, Environment.NewLine);
+            form.SetField("Feat+Traits", feats);
+        }
+
+        private static void SetFeatureTraits(ICharacter character, AcroFields form)
+        {
+            var featuresTraits = GenericItemListToTitles("Features", character.Features, Environment.NewLine) +
+                                 GenericItemListToTitles("Traits", character.Traits, Environment.NewLine);
+            form.SetField("Features and Traits", featuresTraits);
+        }
+
+        private static void SetProfLang(ICharacter character, AcroFields form)
+        {
+            var proficienciesLang = MakeTextBlock("Proficiencies", character.Proficiencies, Environment.NewLine) +
+                                    MakeTextBlock("Languages", character.Languages, ", ");
+            form.SetField("ProficienciesLang", proficienciesLang.Trim().TrimEnd(','));
+        }
+
+        private static void SetWeapons(ICharacter character, AcroFields form)
+        {
             var n = 1;
             foreach (var weapon in character.Weapons.Take(3))
             {
                 form.SetField($"Wpn{n} Name", weapon.Name);
                 var statSearch = StatSearch(weapon);
 
-                var attack = character.Abilities.FirstOrDefault(x => x.Name == statSearch)?.Bonus +weapon.AttackBonus;
-                
+                var attack = character.Abilities.FirstOrDefault(x => x.Name == statSearch)?.Bonus + weapon.AttackBonus;
+
                 if (weapon.Prof)
                 {
                     if (int.TryParse(character.Properities?.FirstOrDefault(x => x.Name == "ProfBonus")?.Value, out var intOut))
                     {
                         attack += intOut;
                     }
-                    
                 }
-                form.SetField($"Wpn{n} AtkBonus",$"{attack}");
+                form.SetField($"Wpn{n} AtkBonus", $"{attack}");
 
                 var damageString = string.Empty;
                 foreach (var damage in weapon.Damages)
@@ -89,42 +98,78 @@ namespace FG5eXmlToPDF
                 }
                 form.SetField($"Wpn{n} Damage", damageString);
                 n++;
-
-
             }
-            var proficienciesLang = MakeTextBlock("Proficiencies", character.Proficiencies, Environment.NewLine) + MakeTextBlock("Languages", character.Languages, ", " );
-            form.SetField("ProficienciesLang", proficienciesLang.Trim().TrimEnd(','));
-            var featuresTraits = GenericItemListToTitles("Features", character.Features, Environment.NewLine) + GenericItemListToTitles("Traits", character.Traits, Environment.NewLine);
-            form.SetField("Features and Traits", featuresTraits);
-            var feats = GenericItemListToTitles("Feats", character.Features, Environment.NewLine);
-            form.SetField("Feat+Traits", feats);
-            var y = string.Empty;
-            var inventory =
-                character.Inventory.Aggregate(y, (current, item) => current + $"{item.Name} ({item.Text}), ");
-            form.SetField("Equipment", inventory.Trim().TrimEnd(','));
-
-            form.SetField("Text1", GenericItemListToTextBox("Features", character.Features, Environment.NewLine) 
-                + GenericItemListToTextBox("Traits", character.Traits, Environment.NewLine) 
-                + GenericItemListToTextBox("Feats", character.Features, Environment.NewLine));
-           
-            stamper.Close();
         }
 
-        public static string GenericItemListToTitles(string title, List<GenericItem> list, string seperator)
+        private static void SetSkills(ICharacter character, AcroFields form)
+        {
+            foreach (var skill in character.Skills)
+            {
+                form.SetField(skill.Name, $"{skill.Total}");
+                form.SetField($"{skill.Name} Check Box", Helper.BoolToYesNo(skill.Prof));
+            }
+        }
+
+        private static void SetAbulities(ICharacter character, AcroFields form)
+        {
+            var saveCheckBoxMap = new Dictionary<string, string>()
+            {
+                {"strength", "Check Box 11"},
+                {"dexterity", "Check Box 18"},
+                {"constitution", "Check Box 19"},
+                {"intelligence", "Check Box 20"},
+                {"wisdom", "Check Box 21"},
+                {"charisma", "Check Box 22"}
+            };
+            foreach (var ability in character.Abilities)
+            {
+                var threeLetter = ability.Name.Substring(0, 3).ToUpper();
+                form.SetField(threeLetter, $"{ability.Score}");
+                form.SetField($"{threeLetter}mod", $"{ability.Bonus}");
+                form.SetField($"ST {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ability.Name)}", $"{ability.Save}");
+                form.SetField(saveCheckBoxMap[ability.Name], Helper.BoolToYesNo(ability.Saveprof));
+            }
+        }
+
+        private static void SetProperties(ICharacter character, AcroFields form)
+        {
+            foreach (var prop in character.Properities)
+            {
+                form.SetField(prop.Name, prop.Value);
+            }
+            form.SetField("CharacterName 2", character.Properities.FirstOrDefault(x => x.Name == "Name")?.Value);
+        }
+
+        private static string GetLevels(ICharacter character)
+        {
+            var levels = string.Empty;
+            foreach (var charClass in character.Classes)
+            {
+                if (levels != string.Empty)
+                {
+                    levels += " / ";
+                }
+                levels += $"{charClass.Name} ({charClass.Level})";
+            }
+            return levels;
+        }
+
+        #region HelperFunctions
+        private static string GenericItemListToTitles(string title, List<GenericItem> list, string seperator)
         {
             var result = $"[{title}]{Environment.NewLine}";
-            list.ForEach(x=> result += $"{x.Name}{seperator}");
+            list.ForEach(x => result += $"{x.Name}{seperator}");
             return result;
         }
 
-        public static string GenericItemListToTextBox(string title, List<GenericItem> list, string seperator)
+        private static string GenericItemListToTextBox(string title, List<GenericItem> list, string seperator)
         {
             var result = $"[{title}]{Environment.NewLine}";
             list.ForEach(x => result += $"{x.Name}: {x.Text}{seperator}");
             return result;
         }
 
-        public static string MakeTextBlock(string title, IEnumerable<string> list, string seperator)
+        private static string MakeTextBlock(string title, IEnumerable<string> list, string seperator)
         {
             var result = $"[{title}]{Environment.NewLine}";
             return list.Aggregate(result, (current, item) => current + (item + seperator));
@@ -147,6 +192,7 @@ namespace FG5eXmlToPDF
         private static Ability GetAbilityByName(Character5e character, string abulity)
         {
             return character.Abilities.FirstOrDefault(x => x.Name == abulity);
-        }
+        } 
+        #endregion
     }
 }
