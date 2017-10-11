@@ -22,8 +22,7 @@ namespace FG5eXmlToPDF
         {
             var xml = XDocument.Load(fileString);
             _charElement = xml?.Root?.Element("character");
-
-
+            
             ICharacter character = new Character5e();
             GetProperties(character);
 
@@ -112,10 +111,10 @@ namespace FG5eXmlToPDF
                 {
                     damages.Add(new Damage()
                     {
-                        Type = danage.Element("type").Value,
-                        Stat = danage.Element("stat").Value,
-                        Dice = GetDice(danage.Element("dice").Value),
-                        Bonus = danage.Element("bonus").Value
+                        Type = danage?.Element("type")?.Value,
+                        Stat = danage?.Element("stat")?.Value,
+                        Dice = GetDice(danage?.Element("dice")?.Value),
+                        Bonus = danage?.Element("bonus")?.Value
                     });
                 }
                 character.Weapons.Add(new Weapon()
