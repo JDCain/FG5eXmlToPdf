@@ -3,7 +3,7 @@ using FG5eXmlToPdf.Models;
 
 namespace FG5eXmlToPDF.Models
 {
-    public class Character5e
+    public class Character5e : ICharacter
     {
         public List<Skill> Skills { get;  }
         public List<Ability> Abilities { get; }

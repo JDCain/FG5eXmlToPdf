@@ -16,7 +16,7 @@ namespace FG5eXmlToPDF
 {
     public static class FG5ePdf
     {
-        public static void Write(Character5e character, string outFile)
+        public static void Write(ICharacter character, string outFile)
         {
             var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("FG5eXmlToPdf.DnD_5E_CharacterSheet - Form Fillable.pdf");
             var pdfReader = new PdfReader(stream);

@@ -18,13 +18,13 @@ namespace FG5eXmlToPDF
     public static class FG5eXml
     {
 
-        public static Character5e LoadCharacter(string fileString)
+        public static ICharacter LoadCharacter(string fileString)
         {
             var xml = XDocument.Load(fileString);
             _charElement = xml?.Root?.Element("character");
 
 
-            var character = new Character5e();
+            ICharacter character = new Character5e();
             var props = character.Properities;
             foreach (var prop in props)
             {
