@@ -25,52 +25,85 @@ namespace FG5eXmlToPDF
 
 
             ICharacter character = new Character5e();
-            var props = character.Properities;
-            foreach (var prop in props)
-            {
-                prop.Value = GetCharValue(prop.XmlPath);
-            }
-            //props.Add("AC", _charElement.XPathSelectElement("defenses/ac/total")?.Value ?? string.Empty);
-
+            GetProperties(character);
 
             var abilityList = _charElement?.Element("abilities").Elements().ToList();
-            foreach (var attrib in abilityList)
-            {
-                character.Abilities.Add(new Ability()
-                {
-                    Name = attrib.Name.ToString(),
-                    Score = int.Parse(attrib.Element("score").Value),
-                    Bonus = int.Parse(attrib.Element("bonus").Value),
-                    Save = int.Parse(attrib.Element("save").Value),
-                    Savemodifier = int.Parse(attrib.Element("savemodifier").Value),
-                    Saveprof = Helper.StringIntToBool(attrib.Element("saveprof").Value)
-                });
-            }
+            GetAbulites(abilityList, character);
 
             var skillList = _charElement?.Element("skilllist").Elements().ToList();
-            foreach (var skill in skillList)
-            {
-                character.Skills.Add(new Skill()
-                {
-                    Name = skill.Element("name").Value,
-                    Misc = int.Parse(skill.Element("misc").Value),
-                    Prof = Helper.StringIntToBool(skill.Element("prof").Value),
-                    Stat = skill.Element("stat").Value,
-                    Total = int.Parse(skill.Element("total").Value)
-                });
-            }
+            GetSkills(skillList, character);
 
             var classList = _charElement?.XPathSelectElement("classes").Elements().ToList();
-            foreach (var charClass in classList)
+            GetCharClasses(classList, character);
+
+            var weaponList = _charElement?.XPathSelectElement("weaponlist").Elements().ToList();
+            GetWeapons(weaponList, character);
+
+            var proficiencyList = _charElement?.XPathSelectElement("proficiencylist").Elements().ToList();
+            GetProf(proficiencyList, character);
+
+            var languageList = _charElement?.XPathSelectElement("languagelist").Elements().ToList();
+            GetLanguage(languageList, character);
+
+            var traitList = _charElement?.XPathSelectElement("traitlist").Elements().ToList();
+            PopulateGenericList(traitList, character.Traits);
+
+            var featList = _charElement?.XPathSelectElement("featlist").Elements().ToList();
+            PopulateGenericList(featList, character.Feats);
+
+            var featuresList = _charElement?.XPathSelectElement("featurelist").Elements().ToList();
+            PopulateGenericList(featuresList, character.Features);
+
+            var inventoryList = _charElement?.XPathSelectElement("inventorylist").Elements().ToList();
+            foreach (var item in inventoryList)
             {
-                character.Classes.Add(new Class()
+                character.Inventory.Add(new GenericItem()
                 {
-                    Name = charClass.Element("name").Value,
-                    Level = charClass.Element("level").Value,
+                    Name = item.Element("name").Value,
+                    Text = item.Element("count").Value
                 });
             }
 
-            var weaponList = _charElement?.XPathSelectElement("weaponlist").Elements().ToList();
+            return character;
+        }
+
+        private static void PopulateGenericList(List<XElement> traitList, List<GenericItem> itemList)
+        {
+            traitList.ForEach(x => itemList.Add(GenericItemMaker(x)));
+        }
+        private static GenericItem GenericItemMaker(XElement features)
+        {
+            var text = string.Empty;
+            foreach (var line in features.Element("text").Elements().ToList())
+            {
+                text += line.Value + Environment.NewLine;
+            }
+
+            return new GenericItem()
+            {
+                Name = features.Element("name").Value,
+                Text = text,
+            };
+        }
+
+        private static void GetLanguage(List<XElement> languageList, ICharacter character)
+        {
+            foreach (var language in languageList)
+            {
+                character.Languages.Add(language.Value);
+            }
+        }
+
+        private static void GetProf(List<XElement> proficiencyList, ICharacter character)
+        {
+            foreach (var proficiency in proficiencyList)
+            {
+                character.Proficiencies.Add(proficiency.Value);
+            }
+        }
+
+        private static void GetWeapons(List<XElement> weaponList, ICharacter character)
+        {
             foreach (var weapon in weaponList)
             {
                 var damageList = weapon.Element("damagelist").Elements().ToList();
@@ -95,64 +128,58 @@ namespace FG5eXmlToPDF
                     Damages = damages
                 });
             }
-
-            var proficiencyList = _charElement?.XPathSelectElement("proficiencylist").Elements().ToList();
-            foreach (var proficiency in proficiencyList)
-            {
-               character.Proficiencies.Add(proficiency.Value);
-            }
-
-            var languageList = _charElement?.XPathSelectElement("languagelist").Elements().ToList();
-            foreach (var language in languageList)
-            {
-                character.Languages.Add(language.Value);
-            }
-
-            var traitList = _charElement?.XPathSelectElement("traitlist").Elements().ToList();
-            traitList.ForEach(x => character.Traits.Add(GenericItemMaker(x)));
-            //foreach (var trait in traitList)
-            //{
-            //    character.Traits.Add(GenericItemMaker(trait));
-            //}
-
-            var featList = _charElement?.XPathSelectElement("featlist").Elements().ToList();
-            foreach (var feat in featList)
-            {
-                character.Feats.Add(GenericItemMaker(feat));
-            }
-
-            var featuresList = _charElement?.XPathSelectElement("featurelist").Elements().ToList();
-            foreach (var features in featuresList)
-            {
-                character.Features.Add(GenericItemMaker(features));
-            }
-
-            var inventoryList = _charElement?.XPathSelectElement("inventorylist").Elements().ToList();
-            foreach (var item in inventoryList)
-            {
-                character.Inventory.Add(new GenericItem()
-                {
-                    Name = item.Element("name").Value,
-                    Text = item.Element("count").Value
-                });
-            }
-
-            return character;
         }
 
-        private static GenericItem GenericItemMaker(XElement features)
+        private static void GetCharClasses(List<XElement> classList, ICharacter character)
         {
-            var text = string.Empty;
-            foreach (var line in features.Element("text").Elements().ToList())
+            foreach (var charClass in classList)
             {
-                text += line.Value + Environment.NewLine;
+                character.Classes.Add(new Class()
+                {
+                    Name = charClass.Element("name").Value,
+                    Level = charClass.Element("level").Value,
+                });
             }
+        }
 
-            return new GenericItem()
+        private static void GetSkills(List<XElement> skillList, ICharacter character)
+        {
+            foreach (var skill in skillList)
             {
-                Name = features.Element("name").Value,
-                Text = text,
-            };
+                character.Skills.Add(new Skill()
+                {
+                    Name = skill.Element("name").Value,
+                    Misc = int.Parse(skill.Element("misc").Value),
+                    Prof = Helper.StringIntToBool(skill.Element("prof").Value),
+                    Stat = skill.Element("stat").Value,
+                    Total = int.Parse(skill.Element("total").Value)
+                });
+            }
+        }
+
+        private static void GetAbulites(List<XElement> abilityList, ICharacter character)
+        {
+            foreach (var attrib in abilityList)
+            {
+                character.Abilities.Add(new Ability()
+                {
+                    Name = attrib.Name.ToString(),
+                    Score = int.Parse(attrib.Element("score").Value),
+                    Bonus = int.Parse(attrib.Element("bonus").Value),
+                    Save = int.Parse(attrib.Element("save").Value),
+                    Savemodifier = int.Parse(attrib.Element("savemodifier").Value),
+                    Saveprof = Helper.StringIntToBool(attrib.Element("saveprof").Value)
+                });
+            }
+        }
+
+        private static void GetProperties(ICharacter character)
+        {
+            var props = character.Properities;
+            foreach (var prop in props)
+            {
+                prop.Value = GetCharValue(prop.XmlPath);
+            }
         }
 
         private static string GetDice(string diceString)
@@ -170,13 +197,12 @@ namespace FG5eXmlToPDF
             return result;
         }
 
-
-        private static XElement _charElement;
-
         private static string GetCharValue(string name)
         {
             //everything is lowercase as far as I can tell in the xml
             return _charElement.XPathSelectElement(name.ToLower())?.Value.TrimStart('0') ?? string.Empty;
         }
+
+        private static XElement _charElement;
     }
 }
