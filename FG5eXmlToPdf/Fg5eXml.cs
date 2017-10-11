@@ -62,7 +62,16 @@ namespace FG5eXmlToPDF
                     Text = item.Element("count").Value
                 });
             }
-
+            var powerList = _charElement?.XPathSelectElement("powers").Elements().ToList();
+            foreach (var power in powerList)
+            {
+                character.Powers.Add(new Power()
+                {
+                    Name = power.Element("name").Value,
+                    Level = int.Parse((power.Element("level").Value)),
+                    Prepaired = Helper.StringIntToBool(((power.Element("level").Value)))
+                });
+            }
             return character;
         }
 

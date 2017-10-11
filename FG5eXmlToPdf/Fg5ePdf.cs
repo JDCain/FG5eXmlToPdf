@@ -31,6 +31,12 @@ namespace FG5eXmlToPDF
             SetFeats(character, form);
             SetEquipment(character, form);
             SetDetail(character, form);
+            var n = 0;
+            foreach (var cantrip in character.Powers.Where(x => x.Level == 0).Take(8))
+            {
+                form.SetField($"Cantrip-{n}", cantrip.Name);
+                n++;
+            }
 
             stamper.Close();
         }

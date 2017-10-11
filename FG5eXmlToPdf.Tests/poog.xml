@@ -455,7 +455,7 @@
 				<used type="number">0</used>
 			</spellslots9>
 		</powermeta>
-		<powermode type="string">standard</powermode>
+		<powermode type="string">preparation</powermode>
 		<powers>
 			<id-00001>
 				<actions>
@@ -490,6 +490,7 @@
 				<name type="string">Sacred Flame</name>
 				<prepared type="number">0</prepared>
 				<range type="string">60 feet</range>
+				<ritual type="number">0</ritual>
 				<school type="string">Evocation</school>
 				<source type="string">Cleric</source>
 			</id-00001>
@@ -606,8 +607,9 @@
 				<level type="number">1</level>
 				<locked type="number">1</locked>
 				<name type="string">Divine Favor</name>
-				<prepared type="number">0</prepared>
+				<prepared type="number">1</prepared>
 				<range type="string">Self</range>
+				<ritual type="number">0</ritual>
 				<school type="string">Evocation</school>
 				<source type="string">Cleric War Domain, Paladin</source>
 			</id-00006>
@@ -644,6 +646,7 @@
 				<name type="string">Inflict Wounds</name>
 				<prepared type="number">0</prepared>
 				<range type="string">Touch</range>
+				<ritual type="number">0</ritual>
 				<school type="string">Necromancy</school>
 				<source type="string">Cleric</source>
 			</id-00007>
@@ -668,7 +671,7 @@
 				<level type="number">1</level>
 				<locked type="number">1</locked>
 				<name type="string">Shield of Faith</name>
-				<prepared type="number">0</prepared>
+				<prepared type="number">1</prepared>
 				<range type="string">60 feet</range>
 				<school type="string">Abjuration</school>
 				<source type="string">Cleric, Cleric War Domain, Paladin</source>
