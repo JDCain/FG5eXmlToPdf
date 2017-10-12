@@ -31,11 +31,19 @@ namespace FG5eXmlToPDF
             SetFeats(character, form);
             SetEquipment(character, form);
             SetDetail(character, form);
-            var n = 0;
-            foreach (var cantrip in character.Powers.Where(x => x.Level == 0).Take(8))
+            if (character.Powers.Count > 0)
             {
-                form.SetField($"Cantrip-{n}", cantrip.Name);
-                n++;
+                for (var level = 0; level <= character.Powers.Max(x => x.Level); level++)
+                {
+                    var n = 0;
+                    var take = level == 0 ? 8 : 11;
+                    foreach (var spell in character.Powers.Where(x => x.Level == level).Take(take))
+                    {
+                        form.SetField($"Spell-{level}-{n}", spell.Name);
+                        form.SetField($"Prepaired_Spell-{level}-{n}", Helper.BoolToYesNo(spell.Prepaired));
+                        n++;
+                    }
+                }
             }
 
             stamper.Close();
