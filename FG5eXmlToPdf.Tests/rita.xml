@@ -147,8 +147,9 @@
 		<hp>
 			<deathsavefail type="number">0</deathsavefail>
 			<deathsavesuccess type="number">0</deathsavesuccess>
+			<hdmod type="number">0</hdmod>
 			<temporary type="number">0</temporary>
-			<total type="number">16</total>
+			<total type="number">12</total>
 			<wounds type="number">0</wounds>
 		</hp>
 		<initiative>

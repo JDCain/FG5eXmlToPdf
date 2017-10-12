@@ -253,7 +253,7 @@
 				<weight type="number">0.5</weight>
 			</id-00001>
 			<id-00002>
-				<carried type="number">1</carried>
+				<carried type="number">2</carried>
 				<cost type="string">25 gp</cost>
 				<count type="number">2</count>
 				<description type="formattedtext">
@@ -267,7 +267,7 @@
 				<weight type="number">1</weight>
 			</id-00002>
 			<id-00003>
-				<carried type="number">1</carried>
+				<carried type="number">2</carried>
 				<cost type="string">50 gp</cost>
 				<count type="number">3</count>
 				<description type="formattedtext">
