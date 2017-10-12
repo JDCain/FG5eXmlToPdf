@@ -11,31 +11,31 @@
 			</charisma>
 			<constitution>
 				<bonus type="number">2</bonus>
-				<save type="number">4</save>
-				<savemodifier type="number">0</savemodifier>
-				<saveprof type="number">1</saveprof>
-				<score type="number">14</score>
-			</constitution>
-			<dexterity>
-				<bonus type="number">2</bonus>
 				<save type="number">2</save>
 				<savemodifier type="number">0</savemodifier>
 				<saveprof type="number">0</saveprof>
-				<score type="number">15</score>
+				<score type="number">14</score>
+			</constitution>
+			<dexterity>
+				<bonus type="number">3</bonus>
+				<save type="number">5</save>
+				<savemodifier type="number">0</savemodifier>
+				<saveprof type="number">1</saveprof>
+				<score type="number">17</score>
 			</dexterity>
 			<intelligence>
 				<bonus type="number">0</bonus>
-				<save type="number">0</save>
-				<savemodifier type="number">0</savemodifier>
-				<saveprof type="number">0</saveprof>
-				<score type="number">10</score>
-			</intelligence>
-			<strength>
-				<bonus type="number">1</bonus>
-				<save type="number">3</save>
+				<save type="number">2</save>
 				<savemodifier type="number">0</savemodifier>
 				<saveprof type="number">1</saveprof>
-				<score type="number">13</score>
+				<score type="number">11</score>
+			</intelligence>
+			<strength>
+				<bonus type="number">-1</bonus>
+				<save type="number">-1</save>
+				<savemodifier type="number">0</savemodifier>
+				<saveprof type="number">0</saveprof>
+				<score type="number">8</score>
 			</strength>
 			<wisdom>
 				<bonus type="number">1</bonus>
@@ -47,25 +47,20 @@
 		</abilities>
 		<adventurelist>
 		</adventurelist>
-		<age type="string">15</age>
 		<alignment type="string">Neutral Evil</alignment>
-		<appearance type="string">Apperance</appearance>
 		<backgroundlink type="windowreference">
 			<class></class>
 			<recordname></recordname>
 		</backgroundlink>
-		<bonds type="string">Bonds</bonds>
 		<classes>
 			<id-00001>
-				<casterlevelinvmult type="number">0</casterlevelinvmult>
-				<casterpactmagic type="number">0</casterpactmagic>
-				<hddie type="dice">d10</hddie>
+				<hddie type="dice">d8</hddie>
 				<hdused type="number">0</hdused>
 				<level type="number">1</level>
-				<name type="string">Fighter</name>
+				<name type="string">Rogue</name>
 				<shortcut type="windowreference">
 					<class>reference_class</class>
-					<recordname>reference.classdata.fighter@DD PHB Deluxe</recordname>
+					<recordname>reference.classdata.rogue@DD PHB Deluxe</recordname>
 				</shortcut>
 			</id-00001>
 		</classes>
@@ -97,15 +92,15 @@
 				<prof type="number">1</prof>
 				<shield type="number">0</shield>
 				<temporary type="number">0</temporary>
-				<total type="number">13</total>
+				<total type="number">14</total>
 			</ac>
 		</defenses>
 		<encumbrance>
-			<encumbered type="number">65</encumbered>
-			<encumberedheavy type="number">130</encumberedheavy>
-			<liftpushdrag type="number">390</liftpushdrag>
-			<load type="number">18</load>
-			<max type="number">195</max>
+			<encumbered type="number">40</encumbered>
+			<encumberedheavy type="number">80</encumberedheavy>
+			<liftpushdrag type="number">240</liftpushdrag>
+			<load type="number">19.25</load>
+			<max type="number">120</max>
 		</encumbrance>
 		<exp type="number">0</exp>
 		<expneeded type="number">0</expneeded>
@@ -116,48 +111,48 @@
 			<id-00001>
 				<level type="number">1</level>
 				<locked type="number">1</locked>
-				<name type="string">Dueling Fighting Style</name>
-				<source type="string">Fighter</source>
+				<name type="string">Expertise</name>
+				<source type="string">Rogue</source>
 				<text type="formattedtext">
-					<p>When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.</p>
+					<p>At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.</p>
+					<p>At 6th level, you can choose two more of your proficiencies (in skills or with thieves' tools) to gain this benefit.</p>
 				</text>
 			</id-00001>
 			<id-00002>
 				<level type="number">1</level>
 				<locked type="number">1</locked>
-				<name type="string">Second Wind</name>
-				<source type="string">Fighter</source>
+				<name type="string">Thieves' Cant</name>
+				<source type="string">Rogue</source>
 				<text type="formattedtext">
-					<p>You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.</p>
-					<p>Once you use this feature, you must finish a short or long rest before you can use it again.</p>
+					<p>During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.</p>
+					<p>In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.</p>
 				</text>
 			</id-00002>
 			<id-00003>
-				<level type="number">2</level>
+				<level type="number">1</level>
 				<locked type="number">1</locked>
-				<name type="string">Action Surge</name>
-				<source type="string">Fighter</source>
+				<name type="string">Sneak Attack</name>
+				<source type="string">Rogue</source>
 				<text type="formattedtext">
-					<p>Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action.</p>
-					<p>Once you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.</p>
+					<p>Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.</p>
+					<p>You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll.</p>
+					<p>The amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.</p>
 				</text>
 			</id-00003>
 		</featurelist>
-		<flaws type="string">She finds it hard not to shout when she speaks, and loves taking risks in combat to scare her enemies.</flaws>
-		<gender type="string">F</gender>
-		<height type="string">2ft</height>
+		<gender type="string">M</gender>
 		<hp>
 			<deathsavefail type="number">0</deathsavefail>
 			<deathsavesuccess type="number">0</deathsavesuccess>
+			<hdmod type="number">0</hdmod>
 			<temporary type="number">0</temporary>
-			<total type="number">16</total>
+			<total type="number">10</total>
 			<wounds type="number">0</wounds>
 		</hp>
-		<ideals type="string">Ideals</ideals>
 		<initiative>
 			<misc type="number">0</misc>
 			<temporary type="number">0</temporary>
-			<total type="number">2</total>
+			<total type="number">3</total>
 		</initiative>
 		<inventorylist>
 			<id-00001>
@@ -181,17 +176,12 @@
 				<weight type="number">10</weight>
 			</id-00001>
 			<id-00002>
-				<ac type="number">0</ac>
-				<bonus type="number">0</bonus>
 				<carried type="number">2</carried>
 				<cost type="string">25 gp</cost>
-				<count type="number">2</count>
+				<count type="number">1</count>
 				<damage type="string">1d6 slashing</damage>
-				<description type="formattedtext">
-					<p></p>
-				</description>
 				<isidentified type="number">1</isidentified>
-				<locked type="number">0</locked>
+				<locked type="number">1</locked>
 				<name type="string">Scimitar</name>
 				<properties type="string">Finesse, light</properties>
 				<subtype type="string">Martial Weapons</subtype>
@@ -199,124 +189,159 @@
 				<weight type="number">3</weight>
 			</id-00002>
 			<id-00003>
-				<ac type="number">0</ac>
-				<bonus type="number">0</bonus>
 				<carried type="number">2</carried>
-				<cost type="string">25 gp</cost>
+				<cost type="string">5 cp</cost>
 				<count type="number">1</count>
-				<damage type="string">1d6 piercing</damage>
-				<description type="formattedtext">
-					<p></p>
-				</description>
+				<damage type="string">1d4 piercing</damage>
 				<isidentified type="number">1</isidentified>
-				<locked type="number">0</locked>
-				<name type="string">Shortbow</name>
-				<properties type="string">Ammunition (range 80/320), two-handed</properties>
+				<locked type="number">1</locked>
+				<name type="string">Dart</name>
+				<properties type="string">Finesse, thrown (range 20/60)</properties>
 				<subtype type="string">Simple Ranged Weapons</subtype>
 				<type type="string">Weapon</type>
-				<weight type="number">2</weight>
+				<weight type="number">0.25</weight>
 			</id-00003>
 			<id-00004>
 				<carried type="number">2</carried>
+				<cost type="string">25 gp</cost>
 				<count type="number">1</count>
+				<description type="formattedtext">
+					<p>This set of tools includes a small file, a set of lock picks, a small mirror mounted on a metal handle, a set of narrow-bladed scissors, and a pair of pliers. Proficiency with these tools lets you add your proficiency bonus to any ability checks you make to disarm traps or open locks.</p>
+				</description>
 				<isidentified type="number">1</isidentified>
-				<name type="string">quiver decorated with dog ears</name>
-				<weight type="number">0</weight>
+				<locked type="number">1</locked>
+				<name type="string">Thieves' Tools</name>
+				<subtype type="string">Kits / Sets</subtype>
+				<type type="string">Tools</type>
+				<weight type="number">1</weight>
 			</id-00004>
 			<id-00005>
+				<ac type="number">0</ac>
+				<bonus type="number">0</bonus>
 				<carried type="number">1</carried>
-				<count type="number">1</count>
+				<cost type="string">50 - 100 gp</cost>
+				<count type="number">6</count>
+				<description type="formattedtext">
+					<h>Description</h>
+					<p>You regain 2d4 + 2 hit points when you drink this potion. The potion's red liquid glimmers when agitated.</p>
+					<p><b>Potion Notes</b></p>
+					<p>Drinking or administering a potion takes an action.</p>
+				</description>
 				<isidentified type="number">1</isidentified>
-				<name type="string">lucky pet toad (Spotol)</name>
-				<weight type="number">0</weight>
+				<locked type="number">1</locked>
+				<name type="string">Potion of Healing</name>
+				<nonid_name type="string">Potion</nonid_name>
+				<nonidentified type="string">A vial of red liquid that shimmers when agitated.</nonidentified>
+				<properties type="string">Magic</properties>
+				<rarity type="string">Common</rarity>
+				<spells>
+					<id-00001>
+						<link type="windowreference">
+							<class></class>
+							<recordname></recordname>
+						</link>
+						<name type="string">Potion of Healing</name>
+					</id-00001>
+					<id-00002>
+						<link type="windowreference">
+							<class></class>
+							<recordname></recordname>
+						</link>
+						<name type="string">Potion</name>
+					</id-00002>
+				</spells>
+				<type type="string">Potion</type>
+				<weight type="number">0.5</weight>
 			</id-00005>
 			<id-00006>
 				<carried type="number">1</carried>
+				<cost type="string">1 gp</cost>
 				<count type="number">1</count>
+				<description type="formattedtext">
+					<p>As an action, you can spend a bag of caltrops to cover a square area that is 5 feet on a side. Any creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving this turn and take 1 piercing damage. Taking this damage reduces the creature's walking speed by 10 feet until the creature regains at least 1 hit point. A creature moving through the area at half speed doesn't need to make the save.</p>
+				</description>
 				<isidentified type="number">1</isidentified>
-				<name type="string">jar of pickled hal&#239;ing toes just about ready for eating (equivalent to 1 days trail rations)</name>
-				<weight type="number">0</weight>
+				<locked type="number">1</locked>
+				<name type="string">Caltrops (20)</name>
+				<subtype type="string">Standard</subtype>
+				<type type="string">Adventuring Gear</type>
+				<weight type="number">2</weight>
 			</id-00006>
 			<id-00007>
-				<carried type="number">1</carried>
+				<carried type="number">2</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">toasting fork</name>
+				<name type="string">lock of hair from Goodwife Lotty still tied around her dog&#146;s paw (worn on a thong about Chuffy&#146;s neck)</name>
 				<weight type="number">0</weight>
 			</id-00007>
 			<id-00008>
-				<carried type="number">2</carried>
-				<count type="number">1</count>
+				<carried type="number">1</carried>
+				<count type="number">3</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">bridal veil</name>
+				<name type="string">metal skewers</name>
 				<weight type="number">0</weight>
 			</id-00008>
 			<id-00009>
-				<carried type="number">2</carried>
+				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">hal&#239;fing ladies corset</name>
+				<name type="string">stuffed raven</name>
 				<weight type="number">0</weight>
 			</id-00009>
 			<id-00010>
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">small silver mirror</name>
+				<name type="string">pet spider (called Stankrush) in a wire cage</name>
 				<weight type="number">0</weight>
 			</id-00010>
 			<id-00011>
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">20 feet of rope with dead moles sewn into it</name>
+				<name type="string">3 spare bug cages</name>
 				<weight type="number">0</weight>
 			</id-00011>
 			<id-00012>
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">jar of human perfume (half drunk)</name>
+				<name type="string">bottle of brine-soaked alligator eyes (equivalent to 1 day&#146;s trail rations)</name>
 				<weight type="number">0</weight>
 			</id-00012>
 			<id-00013>
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">meat hook</name>
+				<name type="string">child&#146;s doll with the eyes taken out</name>
 				<weight type="number">0</weight>
 			</id-00013>
 			<id-00014>
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">leather satchel</name>
+				<name type="string">grappling hook</name>
 				<weight type="number">0</weight>
 			</id-00014>
 			<id-00015>
 				<carried type="number">1</carried>
-				<count type="number">1</count>
+				<count type="number">3</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">flint and tinder</name>
+				<name type="string">tindertwigs</name>
 				<weight type="number">0</weight>
 			</id-00015>
 			<id-00016>
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string">set of false teeth</name>
+				<name type="string">curved sewing needle</name>
 				<weight type="number">0</weight>
 			</id-00016>
 			<id-00017>
-				<ac type="number">0</ac>
-				<bonus type="number">0</bonus>
-				<carried type="number">1</carried>
+				<carried type="number">2</carried>
 				<count type="number">1</count>
-				<description type="formattedtext">
-					<p></p>
-				</description>
 				<isidentified type="number">1</isidentified>
-				<name type="string">pocketful of caterpillars</name>
+				<name type="string">cowbell</name>
 				<weight type="number">0</weight>
 			</id-00017>
 		</inventorylist>
@@ -329,78 +354,97 @@
 			</id-00002>
 		</languagelist>
 		<level type="number">1</level>
-		<name type="string">Reta Bigbad</name>
-		<notes type="string">Notes</notes>
+		<name type="string">Chuffy Lickwound</name>
 		<perception type="number">13</perception>
 		<perceptionmodifier type="number">0</perceptionmodifier>
-		<personalitytraits type="string">Reta likes to torment small, harmless animals and usually has a pocket full of such creatures in case she gets bored. </personalitytraits>
+		<personalitytraits type="string">Sadistic Chuffy is horrible indeed. He loves to sneak up on his enemies and stab them. If he gets the chance, he also likes to light fires - lighting fires is Chuffy's idea of great fun, almost as enjoyable as causing big explosions.</personalitytraits>
 		<powermeta>
 			<pactmagicslots1>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots1>
 			<pactmagicslots2>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots2>
 			<pactmagicslots3>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots3>
 			<pactmagicslots4>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots4>
 			<pactmagicslots5>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots5>
 			<pactmagicslots6>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots6>
 			<pactmagicslots7>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots7>
 			<pactmagicslots8>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots8>
 			<pactmagicslots9>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</pactmagicslots9>
 			<spellslots1>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots1>
 			<spellslots2>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots2>
 			<spellslots3>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots3>
 			<spellslots4>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots4>
 			<spellslots5>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots5>
 			<spellslots6>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots6>
 			<spellslots7>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots7>
 			<spellslots8>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots8>
 			<spellslots9>
 				<max type="number">0</max>
+				<used type="number">0</used>
 			</spellslots9>
 		</powermeta>
-		<powermode type="string">standard</powermode>
 		<powers>
 		</powers>
 		<profbonus type="number">2</profbonus>
 		<proficiencylist>
 			<id-00001>
-				<name type="string">Weapon: Simple weapons, martial weapons</name>
+				<name type="string">Weapon: Simple weapons, hand crossbows, longswords, rapiers, shortswords</name>
 			</id-00001>
 			<id-00002>
-				<name type="string">Armor: All armor, shields</name>
+				<name type="string">Tool: Thieves' tools</name>
 			</id-00002>
+			<id-00003>
+				<name type="string">Armor: Light armor</name>
+			</id-00003>
 		</proficiencylist>
 		<race type="string">Goblin</race>
 		<racelink type="windowreference">
@@ -419,80 +463,80 @@
 			</id-00001>
 			<id-00002>
 				<misc type="number">0</misc>
-				<name type="string">Animal Handling</name>
+				<name type="string">Acrobatics</name>
 				<prof type="number">1</prof>
-				<stat type="string">wisdom</stat>
-				<total type="number">3</total>
+				<stat type="string">dexterity</stat>
+				<total type="number">5</total>
 			</id-00002>
 			<id-00003>
 				<misc type="number">0</misc>
-				<name type="string">Survival</name>
+				<name type="string">Sleight of Hand</name>
 				<prof type="number">1</prof>
-				<stat type="string">wisdom</stat>
-				<total type="number">3</total>
+				<stat type="string">dexterity</stat>
+				<total type="number">5</total>
 			</id-00003>
 			<id-00004>
+				<misc type="number">0</misc>
+				<name type="string">Stealth</name>
+				<prof type="number">2</prof>
+				<stat type="string">dexterity</stat>
+				<total type="number">7</total>
+			</id-00004>
+			<id-00005>
 				<misc type="number">0</misc>
 				<name type="string">Arcana</name>
 				<prof type="number">0</prof>
 				<stat type="string">intelligence</stat>
 				<total type="number">0</total>
-			</id-00004>
-			<id-00005>
+			</id-00005>
+			<id-00006>
 				<misc type="number">0</misc>
 				<name type="string">Persuasion</name>
 				<prof type="number">0</prof>
 				<stat type="string">charisma</stat>
 				<total type="number">-1</total>
-			</id-00005>
-			<id-00006>
+			</id-00006>
+			<id-00007>
 				<misc type="number">0</misc>
 				<name type="string">Nature</name>
 				<prof type="number">0</prof>
 				<stat type="string">intelligence</stat>
 				<total type="number">0</total>
-			</id-00006>
-			<id-00007>
+			</id-00007>
+			<id-00008>
 				<misc type="number">0</misc>
 				<name type="string">Medicine</name>
 				<prof type="number">0</prof>
 				<stat type="string">wisdom</stat>
 				<total type="number">1</total>
-			</id-00007>
-			<id-00008>
+			</id-00008>
+			<id-00009>
+				<misc type="number">0</misc>
+				<name type="string">Survival</name>
+				<prof type="number">0</prof>
+				<stat type="string">wisdom</stat>
+				<total type="number">1</total>
+			</id-00009>
+			<id-00010>
 				<misc type="number">0</misc>
 				<name type="string">Performance</name>
 				<prof type="number">0</prof>
 				<stat type="string">charisma</stat>
 				<total type="number">-1</total>
-			</id-00008>
-			<id-00009>
-				<misc type="number">0</misc>
-				<name type="string">Acrobatics</name>
-				<prof type="number">0</prof>
-				<stat type="string">dexterity</stat>
-				<total type="number">2</total>
-			</id-00009>
-			<id-00010>
+			</id-00010>
+			<id-00011>
 				<misc type="number">0</misc>
 				<name type="string">Religion</name>
 				<prof type="number">0</prof>
 				<stat type="string">intelligence</stat>
 				<total type="number">0</total>
-			</id-00010>
-			<id-00011>
+			</id-00011>
+			<id-00012>
 				<misc type="number">0</misc>
 				<name type="string">Athletics</name>
 				<prof type="number">0</prof>
 				<stat type="string">strength</stat>
-				<total type="number">1</total>
-			</id-00011>
-			<id-00012>
-				<misc type="number">0</misc>
-				<name type="string">Sleight of Hand</name>
-				<prof type="number">0</prof>
-				<stat type="string">dexterity</stat>
-				<total type="number">2</total>
+				<total type="number">-1</total>
 			</id-00012>
 			<id-00013>
 				<misc type="number">0</misc>
@@ -524,17 +568,17 @@
 			</id-00016>
 			<id-00017>
 				<misc type="number">0</misc>
-				<name type="string">Stealth</name>
-				<prof type="number">0</prof>
-				<stat type="string">dexterity</stat>
-				<total type="number">2</total>
-			</id-00017>
-			<id-00018>
-				<misc type="number">0</misc>
 				<name type="string">History</name>
 				<prof type="number">0</prof>
 				<stat type="string">intelligence</stat>
 				<total type="number">0</total>
+			</id-00017>
+			<id-00018>
+				<misc type="number">0</misc>
+				<name type="string">Animal Handling</name>
+				<prof type="number">0</prof>
+				<stat type="string">wisdom</stat>
+				<total type="number">1</total>
 			</id-00018>
 		</skilllist>
 		<speed>
@@ -546,7 +590,7 @@
 		</speed>
 		<temp>
 		</temp>
-		<token type="token"></token>
+		<token type="token">campaign/tokens/chuffyicon.png</token>
 		<traitlist>
 			<id-00001>
 				<locked type="number">1</locked>
@@ -568,23 +612,14 @@
 			</id-00002>
 			<id-00003>
 				<locked type="number">1</locked>
-				<name type="string">Balloon Headed</name>
+				<name type="string">Pustular</name>
 				<text type="formattedtext">
-					<p>Your head is particularly wide and large, even for a goblin.</p>
-					<p>Proficiency in Perception, but must roll DEX saves to escape small, confined spaces at disadvantage.</p>
+					<p>Has advantage to save against sickened condition</p>
 				</text>
 			</id-00003>
-			<id-00004>
-				<locked type="number">1</locked>
-				<name type="string">Dog-Sniff-Hate</name>
-				<text type="formattedtext">
-					<p>Unlike many goblins, you're not particularly afraid of dogs. You know what dogs smell like, and that smell makes you mad. Very mad.</p>
-					<p>Add proficiency bonus to damage against canines and double proficiency bonus for Survival checks to track canines.</p>
-				</text>
-			</id-00004>
 		</traitlist>
 		<weaponlist>
-			<id-00002>
+			<id-00001>
 				<attackbonus type="number">0</attackbonus>
 				<attackstat type="string">dexterity</attackstat>
 				<carried type="number">2</carried>
@@ -605,29 +640,29 @@
 					<recordname>....inventorylist.id-00002</recordname>
 				</shortcut>
 				<type type="number">0</type>
-			</id-00002>
-			<id-00003>
+			</id-00001>
+			<id-00002>
 				<attackbonus type="number">0</attackbonus>
+				<attackstat type="string">dexterity</attackstat>
 				<carried type="number">2</carried>
 				<damagelist>
 					<id-00001>
 						<bonus type="number">0</bonus>
-						<dice type="dice">d6</dice>
-						<stat type="string">base</stat>
+						<dice type="dice">d4</dice>
+						<stat type="string">dexterity</stat>
 						<type type="string">piercing</type>
 					</id-00001>
 				</damagelist>
 				<isidentified type="number">1</isidentified>
-				<maxammo type="number">20</maxammo>
-				<name type="string">Shortbow</name>
+				<maxammo type="number">6</maxammo>
+				<name type="string">Dart</name>
 				<prof type="number">1</prof>
 				<shortcut type="windowreference">
 					<class>item</class>
 					<recordname>....inventorylist.id-00003</recordname>
 				</shortcut>
-				<type type="number">1</type>
-			</id-00003>
+				<type type="number">2</type>
+			</id-00002>
 		</weaponlist>
-		<weight type="string">???</weight>
 	</character>
 </root>
