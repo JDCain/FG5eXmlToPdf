@@ -240,7 +240,7 @@
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string"> lucky pet toad &#34;Dogfinder&#34;</name>
+				<name type="string">lucky pet toad &#34;Dogfinder&#34;</name>
 				<weight type="number">0</weight>
 			</id-00003>
 			<id-00004>
@@ -337,7 +337,7 @@
 				<carried type="number">1</carried>
 				<count type="number">1</count>
 				<isidentified type="number">1</isidentified>
-				<name type="string"> wooden flute (too splintery to play for long without injury)</name>
+				<name type="string">wooden flute (too splintery to play for long without injury)</name>
 				<weight type="number">0</weight>
 			</id-00013>
 			<id-00014>
@@ -558,7 +558,7 @@
 				<level type="number">1</level>
 				<locked type="number">1</locked>
 				<name type="string">Cure Wounds</name>
-				<prepared type="number">0</prepared>
+				<prepared type="number">1</prepared>
 				<range type="string">Touch</range>
 				<school type="string">Evocation</school>
 				<source type="string">Bard, Cleric, Cleric Life Domain, Druid, Paladin, Ranger</source>
