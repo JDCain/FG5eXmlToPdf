@@ -36,8 +36,8 @@ namespace FG5eXmlToPDF
                 for (var level = 0; level <= character.Powers.Max(x => x.Level); level++)
                 {
                     var n = 0;
-                    var take = level == 0 ? 8 : 11;
-                    foreach (var spell in character.Powers.Where(x => x.Level == level).Take(take))
+                    //var take = level == 0 ? 8 : 11;
+                    foreach (var spell in character.Powers.Where(x => x.Level == level))
                     {
                         form.SetField($"Spell-{level}-{n}", spell.Name);
                         form.SetField($"Prepaired_Spell-{level}-{n}", Helper.BoolToYesNo(spell.Prepaired));
