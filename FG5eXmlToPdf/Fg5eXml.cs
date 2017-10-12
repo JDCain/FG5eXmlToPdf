@@ -123,14 +123,14 @@ namespace FG5eXmlToPDF
                         Type = danage?.Element("type")?.Value,
                         Stat = danage?.Element("stat")?.Value,
                         Dice = GetDice(danage?.Element("dice")?.Value),
-                        Bonus = danage?.Element("bonus")?.Value
+                        Bonus = danage?.Element("bonus")?.Value ?? "0"
                     });
                 }
                 character.Weapons.Add(new Weapon()
                 {
                     Name = weapon.Element("name").Value,
                     AttackStat = weapon?.Element("attackstat")?.Value ?? String.Empty,
-                    AttackBonus = int.Parse(weapon.Element("attackbonus").Value),
+                    AttackBonus = int.Parse(weapon?.Element("attackbonus")?.Value ?? "0"),
                     Type = int.Parse(weapon.Element("type").Value),
                     Prof = Helper.StringIntToBool(weapon.Element("prof").Value),
                     Damages = damages
