@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using System.Xml.XPath;
 using FG5eXmlToPdf;
 using FG5eXmlToPdf.Models;
@@ -17,7 +12,6 @@ namespace FG5eXmlToPDF
 {
     public static class FG5eXml
     {
-
         public static ICharacter LoadCharacter(string fileString)
         {
             var xml = XDocument.Load(fileString);
@@ -26,43 +20,46 @@ namespace FG5eXmlToPDF
             ICharacter character = new Character5e();
             GetProperties(character);
 
-            var abilityList = _charElement?.Element("abilities").Elements().ToList();
+            var abilityList = XPathElementList("abilities");
             GetAbulites(abilityList, character);
 
-            var skillList = _charElement?.Element("skilllist").Elements().ToList();
+            var skillList = XPathElementList("skilllist");
             GetSkills(skillList, character);
 
-            var classList = _charElement?.XPathSelectElement("classes").Elements().ToList();
+            var classList = XPathElementList("classes");
             GetCharClasses(classList, character);
 
-            var weaponList = _charElement?.XPathSelectElement("weaponlist").Elements().ToList();
+            var weaponList = XPathElementList("weaponlist");
             GetWeapons(weaponList, character);
 
-            var proficiencyList = _charElement?.XPathSelectElement("proficiencylist").Elements().ToList();
+            var proficiencyList = XPathElementList("proficiencylist");
             GetProf(proficiencyList, character);
 
-            var languageList = _charElement?.XPathSelectElement("languagelist").Elements().ToList();
+            var languageList = XPathElementList("languagelist");
             GetLanguage(languageList, character);
 
-            var traitList = _charElement?.XPathSelectElement("traitlist").Elements().ToList();
+            var traitList = XPathElementList("traitlist");
             PopulateGenericList(traitList, character.Traits);
 
-            var featList = _charElement?.XPathSelectElement("featlist").Elements().ToList();
+            var featList = XPathElementList("featlist");
             PopulateGenericList(featList, character.Feats);
 
-            var featuresList = _charElement?.XPathSelectElement("featurelist").Elements().ToList();
+            var featuresList = XPathElementList("featurelist");
             PopulateGenericList(featuresList, character.Features);
 
-            var inventoryList = _charElement?.XPathSelectElement("inventorylist").Elements().ToList();
-            foreach (var item in inventoryList)
+            var inventoryList = XPathElementList("inventorylist");
+            if (inventoryList != null)
             {
-                character.Inventory.Add(new GenericItem()
+                foreach (var item in inventoryList)
                 {
-                    Name = item.Element("name").Value,
-                    Text = item.Element("count").Value
-                });
+                    character.Inventory.Add(new GenericItem()
+                    {
+                        Name = item.Element("name").Value,
+                        Text = item.Element("count").Value
+                    });
+                }
             }
-            var powerList = _charElement?.XPathSelectElement("powers").Elements().ToList();
+            var powerList = XPathElementList("powers");
             foreach (var power in powerList)
             {
                 character.Powers.Add(new Power()
@@ -75,9 +72,14 @@ namespace FG5eXmlToPDF
             return character;
         }
 
+        private static List<XElement> XPathElementList(string xpath)
+        {
+            return _charElement?.XPathSelectElement(xpath)?.Elements()?.ToList();
+        }
+
         private static void PopulateGenericList(List<XElement> traitList, List<GenericItem> itemList)
         {
-            traitList.ForEach(x => itemList.Add(GenericItemMaker(x)));
+            traitList?.ForEach(x => itemList.Add(GenericItemMaker(x)));
         }
         private static GenericItem GenericItemMaker(XElement features)
         {

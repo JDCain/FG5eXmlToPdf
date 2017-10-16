@@ -53,7 +53,7 @@ namespace FG5eXmlToPDF
         {
             form.SetField("Text1", GenericItemListToTextBox("Features", character.Features, Environment.NewLine)
                                    + GenericItemListToTextBox("Traits", character.Traits, Environment.NewLine)
-                                   + GenericItemListToTextBox("Feats", character.Features, Environment.NewLine));
+                                   + GenericItemListToTextBox("Feats", character.Feats, Environment.NewLine));
         }
 
         private static void SetEquipment(ICharacter character, AcroFields form)
