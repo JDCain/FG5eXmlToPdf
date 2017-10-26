@@ -66,7 +66,7 @@ namespace FG5eXmlToPDF
 
         private static void SetFeats(ICharacter character, AcroFields form)
         {
-            var feats = GenericItemListToTitles("Feats", character.Features, Environment.NewLine);
+            var feats = GenericItemListToTitles("Feats", character.Feats, Environment.NewLine);
             form.SetField("Feat+Traits", feats);
         }
 
