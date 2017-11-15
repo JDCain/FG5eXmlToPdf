@@ -50,6 +50,8 @@ namespace FG5eXmlToPDF.Models
                 new Properity("Age"),
                 new Properity("Height"),
                 new Properity("Weight"),
+                new Properity("Appearance"),
+                new Properity("Backstory", "notes"),
 
             };
             Abilities = new List<Ability>();

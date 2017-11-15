@@ -210,7 +210,7 @@ namespace FG5eXmlToPDF
         private static string GetCharValue(string name)
         {
             //everything is lowercase as far as I can tell in the xml
-            return _charElement.XPathSelectElement(name.ToLower())?.Value.TrimStart('0') ?? string.Empty;
+            return _charElement.XPathSelectElement(name.ToLower())?.Value.TrimStart('0').Replace(@"\n", Environment.NewLine) ?? string.Empty;
         }
 
         private static XElement _charElement;
