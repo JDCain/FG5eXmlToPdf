@@ -71,6 +71,17 @@ namespace FG5eXmlToPDF
 
                 });
             }
+            var powerSlotsList = XPathElementList("powermeta");
+            foreach (var slotElement in powerSlotsList)
+            {
+                character.PowerSlots.Add(new GenericItem()
+                {
+                    Name = slotElement.Name.ToString(),
+                    Text = slotElement.Elements("max").First().Value
+                    
+                });
+            }
+            
             return character;
         }
 
