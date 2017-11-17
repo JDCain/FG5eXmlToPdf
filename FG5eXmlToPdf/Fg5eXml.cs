@@ -59,17 +59,32 @@ namespace FG5eXmlToPDF
                     });
                 }
             }
-            var powerList = XPathElementList("powers");
-            foreach (var power in powerList)
+            var powerGroupList = XPathElementList("powergroup");
+            if (powerGroupList != null)
             {
-                character.Powers.Add(new Power()
+                foreach (var powerGroup in powerGroupList)
                 {
-                    Name = power.Element("name").Value,
-                    Level = int.Parse((power.Element("level").Value)),
-                    Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value))),
-                    Group = power.Element("group").Value,
+                    character.PowerGroup.Add(new PowerGroup()
+                    {
+                        Name = powerGroup.Element("name")?.Value,
+                        Stat = powerGroup.Element("stat")?.Value,
+                    });
+                }
+                var powerList = XPathElementList("powers");
 
-                });
+                foreach (var power in powerList)
+                {
+                    var powerGroup = character.PowerGroup.FirstOrDefault(x =>
+                        string.Equals(x.Name, power.Element("group").Value, StringComparison.OrdinalIgnoreCase));
+                    powerGroup.Powers.Add(new Power()
+                    {
+                        Name = power.Element("name").Value,
+                        Level = int.Parse((power.Element("level").Value)),
+                        Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value))),
+                        Group = power.Element("group").Value,
+
+                    });
+                }
             }
             var powerSlotsList = XPathElementList("powermeta");
             foreach (var slotElement in powerSlotsList)
