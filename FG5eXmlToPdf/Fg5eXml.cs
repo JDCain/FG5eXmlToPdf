@@ -161,6 +161,8 @@ namespace FG5eXmlToPDF
                 {
                     Name = charClass.Element("name").Value,
                     Level = charClass.Element("level").Value,
+                    CasterLevelinvmult = int.Parse(charClass.Element("casterlevelinvmult").Value),
+                    CasterPactMagic = int.Parse(charClass.Element("casterpactmagic").Value)
                 });
             }
         }
