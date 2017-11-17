@@ -31,20 +31,35 @@ namespace FG5eXmlToPDF
             SetFeats(character, form);
             SetEquipment(character, form);
             SetDetail(character, form);
-            if (character.Powers.Count > 0)
+
+
+
+            var group = character.PowerGroup.FirstOrDefault(x =>
+                string.Equals(x.Name, "Spells", StringComparison.OrdinalIgnoreCase));
+            var magicClass = character.Classes.Where(x => x.CasterLevelinvmult > 0 || x.CasterPactMagic > 0).ToList().FirstOrDefault();
+            if (magicClass != null)
             {
-                for (var level = 0; level <= character.Powers.Max(x => x.Level); level++)
+                form.SetField("Spellcasting Class 2", magicClass.Name);
+                form.SetField("SpellcastingAbility 2", group?.Stat);
+            }
+            var slotString = magicClass?.CasterPactMagic > 0 ? "pactmagicslots" : "spellslots";
+            if (group?.Powers.Count > 0)
+            {              
+                for (var level = 0; level <= group?.Powers.Max(x => x.Level); level++)
                 {
                     var n = 0;
                     //var take = level == 0 ? 8 : 11;
-                    foreach (var spell in character.Powers.Where(x => x.Level == level))
+                    foreach (var spell in group?.Powers?.Where(x => x.Level == level))
                     {
                         form.SetField($"Spell-{level}-{n}", spell.Name);
                         form.SetField($"Prepaired_Spell-{level}-{n}", Helper.BoolToYesNo(spell.Prepaired));
+                        form.SetField($"SlotsTotal-{n}",
+                            character.PowerSlots.FirstOrDefault(x => x.Name == $"{slotString}{n}")?.Text);
                         n++;
                     }
                 }
             }
+
 
             stamper.Close();
         }
@@ -66,7 +81,7 @@ namespace FG5eXmlToPDF
 
         private static void SetFeats(ICharacter character, AcroFields form)
         {
-            var feats = GenericItemListToTitles("Feats", character.Features, Environment.NewLine);
+            var feats = GenericItemListToTitles("Feats", character.Feats, Environment.NewLine);
             form.SetField("Feat+Traits", feats);
         }
 

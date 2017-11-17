@@ -16,6 +16,7 @@ namespace FG5eXmlToPDF.Models
         List<Skill> Skills { get; }
         List<GenericItem> Traits { get; }
         List<Weapon> Weapons { get; }
-        List<Power> Powers { get; }
+        List<PowerGroup> PowerGroup { get; }
+        List<GenericItem> PowerSlots { get; }
     }
 }

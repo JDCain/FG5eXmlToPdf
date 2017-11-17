@@ -16,8 +16,8 @@ namespace FG5eXmlToPDF.Models
         public List<GenericItem> Inventory { get; }
         public List<Class> Classes { get;  }
         public List<Weapon> Weapons { get; }
-        public List<Power> Powers { get; }
-
+        public List<PowerGroup> PowerGroup { get; }
+        public List<GenericItem> PowerSlots { get; }
         public Character5e()
         {
             Properities = new List<Properity>()
@@ -50,6 +50,8 @@ namespace FG5eXmlToPDF.Models
                 new Properity("Age"),
                 new Properity("Height"),
                 new Properity("Weight"),
+                new Properity("Appearance"),
+                new Properity("Backstory", "notes"),
 
             };
             Abilities = new List<Ability>();
@@ -62,7 +64,10 @@ namespace FG5eXmlToPDF.Models
             Feats = new List<GenericItem>();
             Features = new List<GenericItem>();
             Inventory = new List<GenericItem>();
-            Powers = new List<Power>();
+            PowerGroup = new List<PowerGroup>();
+            PowerSlots = new List<GenericItem>();
         }
+
+        
     }
 }

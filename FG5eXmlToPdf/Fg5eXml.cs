@@ -59,16 +59,44 @@ namespace FG5eXmlToPDF
                     });
                 }
             }
-            var powerList = XPathElementList("powers");
-            foreach (var power in powerList)
+            var powerGroupList = XPathElementList("powergroup");
+            if (powerGroupList != null)
             {
-                character.Powers.Add(new Power()
+                foreach (var powerGroup in powerGroupList)
                 {
-                    Name = power.Element("name").Value,
-                    Level = int.Parse((power.Element("level").Value)),
-                    Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value)))
+                    character.PowerGroup.Add(new PowerGroup()
+                    {
+                        Name = powerGroup.Element("name")?.Value,
+                        Stat = powerGroup.Element("stat")?.Value,
+                    });
+                }
+                var powerList = XPathElementList("powers");
+
+                foreach (var power in powerList)
+                {
+                    var powerGroup = character.PowerGroup.FirstOrDefault(x =>
+                        string.Equals(x.Name, power.Element("group").Value, StringComparison.OrdinalIgnoreCase));
+                    powerGroup.Powers.Add(new Power()
+                    {
+                        Name = power.Element("name").Value,
+                        Level = int.Parse((power.Element("level").Value)),
+                        Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value))),
+                        Group = power.Element("group").Value,
+
+                    });
+                }
+            }
+            var powerSlotsList = XPathElementList("powermeta");
+            foreach (var slotElement in powerSlotsList)
+            {
+                character.PowerSlots.Add(new GenericItem()
+                {
+                    Name = slotElement.Name.ToString(),
+                    Text = slotElement.Elements("max").First().Value
+                    
                 });
             }
+            
             return character;
         }
 
@@ -144,10 +172,14 @@ namespace FG5eXmlToPDF
         {
             foreach (var charClass in classList)
             {
+                int.TryParse(charClass.Element("casterlevelinvmult")?.Value, out int casterlevelinvmult);
+                int.TryParse(charClass.Element("casterpactmagic")?.Value, out int casterpactmagic);
                 character.Classes.Add(new Class()
                 {
                     Name = charClass.Element("name").Value,
                     Level = charClass.Element("level").Value,
+                    CasterLevelinvmult = casterlevelinvmult,
+                    CasterPactMagic = casterpactmagic
                 });
             }
         }
@@ -210,7 +242,7 @@ namespace FG5eXmlToPDF
         private static string GetCharValue(string name)
         {
             //everything is lowercase as far as I can tell in the xml
-            return _charElement.XPathSelectElement(name.ToLower())?.Value.TrimStart('0') ?? string.Empty;
+            return _charElement.XPathSelectElement(name.ToLower())?.Value.TrimStart('0').Replace(@"\n", Environment.NewLine) ?? string.Empty;
         }
 
         private static XElement _charElement;

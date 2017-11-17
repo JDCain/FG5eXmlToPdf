@@ -85,5 +85,12 @@ namespace FG5eXmlToPdf.Tests
         {
             GenerateSheet("randomWarlock.xml", _sourceDirectory);
         }
+
+
+        [TestMethod]
+        public void JandarTest()
+        {
+            GenerateSheet("JandarUlmVrass.xml", _sourceDirectory);
+        }
     }
 }
