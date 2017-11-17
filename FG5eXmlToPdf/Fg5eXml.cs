@@ -66,7 +66,9 @@ namespace FG5eXmlToPDF
                 {
                     Name = power.Element("name").Value,
                     Level = int.Parse((power.Element("level").Value)),
-                    Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value)))
+                    Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value))),
+                    Group = power.Element("group").Value,
+
                 });
             }
             return character;

@@ -5,5 +5,6 @@
         public string Name { get; set; }
         public int Level { get; set; }
         public bool Prepaired { get; set; }
+        public string Group { get; set; }
     }
 }
