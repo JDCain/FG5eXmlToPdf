@@ -105,23 +105,37 @@ namespace FG5eXmlToPDF
             return _charElement?.XPathSelectElement(xpath)?.Elements()?.ToList();
         }
 
-        private static void PopulateGenericList(List<XElement> traitList, List<GenericItem> itemList)
+        private static void PopulateGenericList(List<XElement> gList, List<GenericItem> itemList)
         {
-            traitList?.ForEach(x => itemList.Add(GenericItemMaker(x)));
+            gList?.ForEach(x =>
+            {
+                if (x.HasElements)
+                {
+                    itemList.Add(GenericItemMaker(x));
+                }
+            });
         }
         private static GenericItem GenericItemMaker(XElement features)
         {
-            var text = string.Empty;
-            foreach (var line in features.Element("text").Elements().ToList())
+            if (features.HasElements)
             {
-                text += line.Value + Environment.NewLine;
-            }
+                var text = string.Empty;
+                foreach (var line in features.Element("text").Elements().ToList())
+                {
+                    text += line.Value + Environment.NewLine;
+                }
 
-            return new GenericItem()
+
+                return new GenericItem()
+                {
+                    Name = features.Element("name").Value,
+                    Text = text,
+                };
+            }
+            else
             {
-                Name = features.Element("name").Value,
-                Text = text,
-            };
+                return null;
+            }
         }
 
         private static void GetLanguage(List<XElement> languageList, ICharacter character)

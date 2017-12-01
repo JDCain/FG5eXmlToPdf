@@ -81,6 +81,11 @@ namespace FG5eXmlToPdf.Tests
             GenerateSheet("faffner20170928.xml", _sourceDirectory);
         }
         [TestMethod]
+        public void Faffner()
+        {
+            GenerateSheet("faffner.xml", _sourceDirectory);
+        }
+        [TestMethod]
         public void RandomWarlockTest()
         {
             GenerateSheet("randomWarlock.xml", _sourceDirectory);
