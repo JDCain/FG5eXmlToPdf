@@ -12,16 +12,29 @@ namespace FG5eXmlToPDF
 {
     public static class FG5eXml
     {
-        public static ICharacter LoadCharacter(string fileString)
+        public static List<ICharacter> LoadCharacters(string filePath)
         {
-            var xml = XDocument.Load(fileString);
-            _charElement = xml?.Root?.Element("character");
-            
+            var theXML = XDocument.Load(filePath);
+            if (theXML == null)
+                throw new Exception("FG5eXml: xml not loaded!");
+            var characters = from elem in theXML.Root.Elements() where elem.Name == "character" select elem;
+            var chars = new List<ICharacter>();
+            foreach (var character in characters)
+            { 
+                chars.Add(LoadCharacter(character));
+            }
+            return chars;
+        }
+        private static ICharacter LoadCharacter(XElement charElement)
+        {
+            // Not overly elegant, but will do for minimal code changes
+            _charElement = charElement ?? throw new Exception("characterElement is null");
+
             ICharacter character = new Character5e();
             GetProperties(character);
 
             var abilityList = XPathElementList("abilities");
-            GetAbulites(abilityList, character);
+            GetAbilites(abilityList, character);
 
             var skillList = XPathElementList("skilllist");
             GetSkills(skillList, character);
@@ -160,14 +173,14 @@ namespace FG5eXmlToPDF
             {
                 var damageList = weapon.Element("damagelist").Elements().ToList();
                 var damages = new List<Damage>();
-                foreach (var danage in damageList)
+                foreach (var damage in damageList)
                 {
                     damages.Add(new Damage()
                     {
-                        Type = danage?.Element("type")?.Value,
-                        Stat = danage?.Element("stat")?.Value,
-                        Dice = GetDice(danage?.Element("dice")?.Value),
-                        Bonus = danage?.Element("bonus")?.Value ?? "0"
+                        Type = damage?.Element("type")?.Value,
+                        Stat = damage?.Element("stat")?.Value,
+                        Dice = GetDice(damage?.Element("dice")?.Value),
+                        Bonus = damage?.Element("bonus")?.Value ?? "0"
                     });
                 }
                 character.Weapons.Add(new Weapon()
@@ -175,8 +188,8 @@ namespace FG5eXmlToPDF
                     Name = weapon.Element("name").Value,
                     AttackStat = weapon?.Element("attackstat")?.Value ?? String.Empty,
                     AttackBonus = int.Parse(weapon?.Element("attackbonus")?.Value ?? "0"),
-                    Type = int.Parse(weapon.Element("type").Value),
-                    Prof = Helper.StringIntToBool(weapon.Element("prof").Value),
+                    Type = int.Parse(weapon.Element("type")?.Value ?? "0"),
+                    Prof = Helper.StringIntToBool(weapon.Element("prof")?.Value ?? "0"),
                     Damages = damages
                 });
             }
@@ -213,7 +226,7 @@ namespace FG5eXmlToPDF
             }
         }
 
-        private static void GetAbulites(List<XElement> abilityList, ICharacter character)
+        private static void GetAbilites(List<XElement> abilityList, ICharacter character)
         {
             foreach (var attrib in abilityList)
             {

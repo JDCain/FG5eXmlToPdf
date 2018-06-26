@@ -26,7 +26,8 @@ namespace FG5eXmlToPdf.Tests
             {
                 var xml = XDocument.Load(Path.Combine(currentDirectory, file));
                 if (xml?.Root?.Element("character") == null) return;
-                var character = FG5eXml.LoadCharacter(Path.Combine(currentDirectory, file));
+                var characters = FG5eXml.LoadCharacters(Path.Combine(currentDirectory, file));
+                var character = characters.First();
                 var charName = character.Properities.FirstOrDefault((x) => x.Name == "Name")?.Value;
                 var level = character.Properities.FirstOrDefault((x) => x.Name == "LevelTotal")?.Value;
                 FG5ePdf.Write(
