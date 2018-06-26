@@ -24,12 +24,17 @@ namespace FG5eXmlToPdf.Console
                     try
                     {
                         var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-                        var character = FG5eXml.LoadCharacter(args[0]);
-                        var charName = character.Properities.FirstOrDefault((x) => x.Name == "Name")?.Value;
-                        var level = character.Properities.FirstOrDefault((x) => x.Name == "LevelTotal")?.Value;
-                        var outFile = $@"{currentDirectory}\{charName} ({level}).pdf";
-                        FG5ePdf.Write(character,outFile);
-                        WriteLine($"Wrote: {outFile}");
+                        var characters = FG5eXml.LoadCharacters(args[0]);
+                        if (characters.Count() == 0)
+                            WriteLine($"No characters found!");
+                        foreach (var character in characters)
+                        {
+                            var charName = character.Properities.FirstOrDefault((x) => x.Name == "Name")?.Value;
+                            var level = character.Properities.FirstOrDefault((x) => x.Name == "LevelTotal")?.Value;
+                            var outFile = $@"{currentDirectory}\{charName} ({level}).pdf";
+                            FG5ePdf.Write(character, outFile);
+                            WriteLine($"Wrote: {outFile}");
+                        }
                     }
                     catch (Exception e)
                     {
@@ -43,8 +48,6 @@ namespace FG5eXmlToPdf.Console
                     WriteLine("Can't find the file");
                 }
             }
-
-            
         }
     }
 }
