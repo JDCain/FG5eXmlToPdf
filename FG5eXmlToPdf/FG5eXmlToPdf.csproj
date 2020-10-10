@@ -54,6 +54,7 @@
     <Compile Include="Fg5ePdf.cs" />
     <Compile Include="Models\Character5e.cs" />
     <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\Coin.cs" />
     <Compile Include="Models\Damage.cs" />
     <Compile Include="Models\GenericItem.cs" />
     <Compile Include="Models\ICharacter.cs" />

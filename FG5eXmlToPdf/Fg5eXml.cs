@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using FG5eXmlToPdf;
@@ -41,6 +42,10 @@ namespace FG5eXmlToPDF
 
             var classList = XPathElementList("classes");
             GetCharClasses(classList, character);
+            GetHitDice(classList, character);
+
+            var coinList = XPathElementList("coins");
+            GetCoins(coinList, character);
 
             var weaponList = XPathElementList("weaponlist");
             GetWeapons(weaponList, character);
@@ -131,6 +136,34 @@ namespace FG5eXmlToPDF
             
             return character;
 
+
+        }
+
+        private static void GetCoins(List<XElement> coinList, ICharacter character)
+        {
+            if (coinList == null)
+            {
+                return;
+            }
+            foreach (var coin in coinList)
+            {
+                try
+                {
+                    var coinType = coin.Element("name").Value;
+                    var coinAmount = int.Parse(coin.Element("amount").Value);
+                    character.Coins.Add(new Coin()
+                    {
+                        CoinType = coinType,
+                        Amount = coinAmount
+                    }); ;
+                }
+                catch (Exception)
+                {
+                    //I think there are a lot of empty coin amounts, so this would show too many false errors
+                    //Console.WriteLine("Could not parse coin: {0}", coin);
+                }
+            }
+            
         }
 
         private static List<XElement> XPathElementList(string xpath)
@@ -253,6 +286,32 @@ namespace FG5eXmlToPDF
             }
         }
 
+        private static void GetHitDice(List<XElement> classList, ICharacter character)
+        {
+            StringBuilder sb = new StringBuilder(string.Empty, 50);
+
+            foreach (var charClass in classList)
+            {
+                try
+                {
+                    string hitDie = charClass.Element("hddie").Value;
+                    string Level = charClass.Element("level").Value;
+                    if (sb.Length != 0)
+                    {
+                        sb.Append(", ");
+                    }
+                    sb.Append(Level);
+                    sb.Append(hitDie);
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Could not get hitDice for class: {0}", charClass);
+                }            
+            }
+            character.HitDice = sb.ToString();
+        }
+
         private static void GetSkills(List<XElement> skillList, ICharacter character)
         {
             foreach (var skill in skillList)
@@ -336,5 +395,8 @@ namespace FG5eXmlToPDF
         }
 
         private static XElement _charElement;
+
+
     }
+
 }

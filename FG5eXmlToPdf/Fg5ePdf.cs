@@ -23,7 +23,7 @@ namespace FG5eXmlToPDF
             form.SetField("ClassLevel", levels);
 
             SetProperties(character, form);
-            SetAbulities(character, form);
+            SetAbilities(character, form);
             SetSkills(character, form);
             SetWeapons(character, form);
             SetProfLang(character, form);
@@ -31,7 +31,8 @@ namespace FG5eXmlToPDF
             SetFeats(character, form);
             SetEquipment(character, form);
             SetDetail(character, form);
-
+            SetHitDice(character, form);
+            SetCoins(character, form);
 
 
             var group = character.PowerGroup.FirstOrDefault(x =>
@@ -62,6 +63,14 @@ namespace FG5eXmlToPDF
 
 
             stamper.Close();
+        }
+
+        private static void SetCoins(ICharacter character, AcroFields form)
+        {
+            foreach (var coin in character.Coins)
+            {
+                form.SetField(coin.CoinType, coin.Amount.ToString());
+            }
         }
 
         private static void SetDetail(ICharacter character, AcroFields form)
@@ -139,7 +148,7 @@ namespace FG5eXmlToPDF
             }
         }
 
-        private static void SetAbulities(ICharacter character, AcroFields form)
+        private static void SetAbilities(ICharacter character, AcroFields form)
         {
             var saveCheckBoxMap = new Dictionary<string, string>()
             {
@@ -167,6 +176,11 @@ namespace FG5eXmlToPDF
                 form.SetField(prop.Name, prop.Value);
             }
             form.SetField("CharacterName 2", character.Properities.FirstOrDefault(x => x.Name == "Name")?.Value);
+        }
+
+        private static void SetHitDice(ICharacter character, AcroFields form)
+        {
+            form.SetField("HDTotal",character.HitDice);
         }
 
         private static string GetLevels(ICharacter character)
