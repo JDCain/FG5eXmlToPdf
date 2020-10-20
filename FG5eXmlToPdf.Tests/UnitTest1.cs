@@ -98,5 +98,29 @@ namespace FG5eXmlToPdf.Tests
         {
             GenerateSheet("JandarUlmVrass.xml", _sourceDirectory);
         }
+
+        [TestMethod]
+        public void DavrynTest()
+        {
+            GenerateSheet("Davryn.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void IrininTest()
+        {
+            GenerateSheet("Irinin.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void RothgarTest()
+        {
+            GenerateSheet("Rothgar.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void VachnuTest()
+        {
+            GenerateSheet("Vachnu.xml", _sourceDirectory);
+        }
     }
 }
