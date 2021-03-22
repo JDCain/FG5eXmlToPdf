@@ -101,6 +101,29 @@ namespace FG5eXmlToPdf.Tests
         }
 
         [TestMethod]
+        public void DavrynTest()
+        {
+            GenerateSheet("Davryn.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void IrininTest()
+        {
+            GenerateSheet("Irinin.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void RothgarTest()
+        {
+            GenerateSheet("Rothgar.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void VachnuTest()
+        {
+            GenerateSheet("Vachnu.xml", _sourceDirectory);
+        }
+        [TestMethod]
         public void Char1Test()
         {
             GenerateSheet("char1.xml", _sourceDirectory);
@@ -129,5 +152,6 @@ namespace FG5eXmlToPdf.Tests
         {
             GenerateSheet("char5.xml", _sourceDirectory);
         }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using FG5eXmlToPdf;
@@ -41,6 +42,10 @@ namespace FG5eXmlToPDF
 
             var classList = XPathElementList("classes");
             GetCharClasses(classList, character);
+            GetHitDice(classList, character);
+
+            var coinList = XPathElementList("coins");
+            GetCoins(coinList, character);
 
             var weaponList = XPathElementList("weaponlist");
             GetWeapons(weaponList, character);
@@ -65,11 +70,18 @@ namespace FG5eXmlToPDF
             {
                 foreach (var item in inventoryList)
                 {
-                    character.Inventory.Add(new GenericItem()
+                    try
                     {
-                        Name = item.Element("name").Value,
-                        Text = item.Element("count").Value
-                    });
+                        character.Inventory.Add(new GenericItem()
+                        {
+                            Name = item.Element("name").Value,
+                            Text = item.Element("count").Value
+                        });
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Could not parse Inventory Item: {0}", item);
+                    }
                 }
             }
             var powerGroupList = XPathElementList("powergroup");
@@ -77,40 +89,81 @@ namespace FG5eXmlToPDF
             {
                 foreach (var powerGroup in powerGroupList)
                 {
-                    character.PowerGroup.Add(new PowerGroup()
+                    try
                     {
-                        Name = powerGroup.Element("name")?.Value,
-                        Stat = powerGroup.Element("stat")?.Value,
-                    });
+                        character.PowerGroup.Add(new PowerGroup()
+                        {
+                            Name = powerGroup.Element("name")?.Value,
+                            Stat = powerGroup.Element("stat")?.Value,
+                        });
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Could not parse PowerGroup: {0}", powerGroup);
+                    }
                 }
                 var powerList = XPathElementList("powers");
 
                 foreach (var power in powerList)
                 {
-                    var powerGroup = character.PowerGroup.FirstOrDefault(x =>
-                        string.Equals(x.Name, power.Element("group").Value, StringComparison.OrdinalIgnoreCase));
-                    powerGroup.Powers.Add(new Power()
+                    try
                     {
-                        Name = power.Element("name").Value,
-                        Level = int.Parse((power.Element("level").Value)),
-                        Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value))),
-                        Group = power.Element("group").Value,
-
-                    });
+                        getPower(character, power);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Could not parse power: {0}", power);
+                    }
                 }
             }
             var powerSlotsList = XPathElementList("powermeta");
             foreach (var slotElement in powerSlotsList)
             {
-                character.PowerSlots.Add(new GenericItem()
+                try
                 {
-                    Name = slotElement.Name.ToString(),
-                    Text = slotElement.Elements("max").First().Value
-                    
-                });
+                    character.PowerSlots.Add(new GenericItem()
+                    {
+                        Name = slotElement.Name.ToString(),
+                        Text = slotElement.Elements("max").First().Value
+
+                    });
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Could not parse PowerMeta: {0}", slotElement);
+                }
             }
             
             return character;
+
+
+        }
+
+        private static void GetCoins(List<XElement> coinList, ICharacter character)
+        {
+            if (coinList == null)
+            {
+                return;
+            }
+            foreach (var coin in coinList)
+            {
+                try
+                {
+                    var coinType = coin.Element("name").Value;
+                    var coinAmount = int.Parse(coin.Element("amount").Value);
+                    character.Coins.Add(new Coin()
+                    {
+                        CoinType = coinType,
+                        Amount = coinAmount
+                    }); ;
+                }
+                catch (Exception)
+                {
+                    //I think there are a lot of empty coin amounts, so this would show too many false errors
+                    //Console.WriteLine("Could not parse coin: {0}", coin);
+                }
+            }
+            
         }
 
         private static List<XElement> XPathElementList(string xpath)
@@ -167,31 +220,53 @@ namespace FG5eXmlToPDF
             }
         }
 
+        private static void getPower(ICharacter inputCharacter, XElement power)
+        {
+            var powerGroup = inputCharacter.PowerGroup.FirstOrDefault(x =>
+                string.Equals(x.Name, power.Element("group").Value, StringComparison.OrdinalIgnoreCase));
+            powerGroup.Powers.Add(new Power()
+            {
+                Name = power.Element("name").Value,
+                Level = int.Parse((power.Element("level").Value)),
+                Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value))),
+                Group = power.Element("group").Value,
+
+            });
+        }
+
         private static void GetWeapons(List<XElement> weaponList, ICharacter character)
         {
             foreach (var weapon in weaponList)
             {
-                var damageList = weapon.Element("damagelist").Elements().ToList();
-                var damages = new List<Damage>();
-                foreach (var damage in damageList)
+                try
                 {
-                    damages.Add(new Damage()
+
+                    var damageList = weapon.Element("damagelist").Elements().ToList();
+                    var damages = new List<Damage>();
+                    foreach (var damage in damageList)
                     {
-                        Type = damage?.Element("type")?.Value,
-                        Stat = damage?.Element("stat")?.Value,
-                        Dice = GetDice(damage?.Element("dice")?.Value),
-                        Bonus = damage?.Element("bonus")?.Value ?? "0"
+                        damages.Add(new Damage()
+                        {
+                            Type = damage?.Element("type")?.Value,
+                            Stat = damage?.Element("stat")?.Value,
+                            Dice = GetDice(damage?.Element("dice")?.Value),
+                            Bonus = damage?.Element("bonus")?.Value ?? "0"
+                        });
+                    }
+                    character.Weapons.Add(new Weapon()
+                    {
+                        Name = weapon.Element("name").Value,
+                        AttackStat = weapon?.Element("attackstat")?.Value ?? String.Empty,
+                        AttackBonus = int.Parse(weapon?.Element("attackbonus")?.Value ?? "0"),
+                        Type = int.Parse(weapon.Element("type")?.Value ?? "0"),
+                        Prof = Helper.StringIntToBool(weapon.Element("prof")?.Value ?? "0"),
+                        Damages = damages
                     });
                 }
-                character.Weapons.Add(new Weapon()
+                catch (Exception)
                 {
-                    Name = weapon.Element("name").Value,
-                    AttackStat = weapon?.Element("attackstat")?.Value ?? String.Empty,
-                    AttackBonus = int.Parse(weapon?.Element("attackbonus")?.Value ?? "0"),
-                    Type = int.Parse(weapon.Element("type")?.Value ?? "0"),
-                    Prof = Helper.StringIntToBool(weapon.Element("prof")?.Value ?? "0"),
-                    Damages = damages
-                });
+                    Console.WriteLine("Could not parse Weapon: {0}", weapon);
+                }
             }
         }
 
@@ -211,18 +286,51 @@ namespace FG5eXmlToPDF
             }
         }
 
+        private static void GetHitDice(List<XElement> classList, ICharacter character)
+        {
+            StringBuilder sb = new StringBuilder(string.Empty, 50);
+
+            foreach (var charClass in classList)
+            {
+                try
+                {
+                    string hitDie = charClass.Element("hddie").Value;
+                    string Level = charClass.Element("level").Value;
+                    if (sb.Length != 0)
+                    {
+                        sb.Append(", ");
+                    }
+                    sb.Append(Level);
+                    sb.Append(hitDie);
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Could not get hitDice for class: {0}", charClass);
+                }            
+            }
+            character.HitDice = sb.ToString();
+        }
+
         private static void GetSkills(List<XElement> skillList, ICharacter character)
         {
             foreach (var skill in skillList)
             {
-                character.Skills.Add(new Skill()
+                try
                 {
-                    Name = skill.Element("name").Value,
-                    Misc = int.Parse(skill.Element("misc").Value),
-                    Prof = Helper.StringIntToBool(skill.Element("prof").Value),
-                    Stat = skill.Element("stat").Value,
-                    Total = int.Parse(skill.Element("total").Value)
-                });
+                    character.Skills.Add(new Skill()
+                    {
+                        Name = skill.Element("name").Value,
+                        Misc = int.Parse(skill.Element("misc").Value),
+                        Prof = Helper.StringIntToBool(skill.Element("prof").Value),
+                        Stat = skill.Element("stat").Value,
+                        Total = int.Parse(skill.Element("total").Value)
+                    });
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Could not parse Skill: {0}", skill);
+                }
             }
         }
 
@@ -230,15 +338,22 @@ namespace FG5eXmlToPDF
         {
             foreach (var attrib in abilityList)
             {
-                character.Abilities.Add(new Ability()
+                try
                 {
-                    Name = attrib.Name.ToString(),
-                    Score = int.Parse(attrib.Element("score").Value),
-                    Bonus = int.Parse(attrib.Element("bonus").Value),
-                    Save = int.Parse(attrib.Element("save").Value),
-                    Savemodifier = int.Parse(attrib.Element("savemodifier").Value),
-                    Saveprof = Helper.StringIntToBool(attrib.Element("saveprof").Value)
-                });
+                    character.Abilities.Add(new Ability()
+                    {
+                        Name = attrib.Name.ToString(),
+                        Score = int.Parse(attrib.Element("score").Value),
+                        Bonus = int.Parse(attrib.Element("bonus").Value),
+                        Save = int.Parse(attrib.Element("save").Value),
+                        Savemodifier = int.Parse(attrib.Element("savemodifier").Value),
+                        Saveprof = Helper.StringIntToBool(attrib.Element("saveprof").Value)
+                    });
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Could not parse Ability: {0}", attrib);
+                }
             }
         }
 
@@ -247,7 +362,14 @@ namespace FG5eXmlToPDF
             var props = character.Properities;
             foreach (var prop in props)
             {
-                prop.Value = GetCharValue(prop.XmlPath);
+                try
+                {
+                    prop.Value = GetCharValue(prop.XmlPath);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Could not parse Property: {0}", prop);
+                }
             }
         }
 
@@ -273,5 +395,8 @@ namespace FG5eXmlToPDF
         }
 
         private static XElement _charElement;
+
+
     }
+
 }

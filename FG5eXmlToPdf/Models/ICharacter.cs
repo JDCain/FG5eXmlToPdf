@@ -10,6 +10,7 @@ namespace FG5eXmlToPDF.Models
         List<GenericItem> Feats { get; }
         List<GenericItem> Features { get; }
         List<GenericItem> Inventory { get; }
+        List<Coin> Coins { get; }
         List<string> Languages { get; }
         List<string> Proficiencies { get; }
         List<Properity> Properities { get; }
@@ -18,5 +19,6 @@ namespace FG5eXmlToPDF.Models
         List<Weapon> Weapons { get; }
         List<PowerGroup> PowerGroup { get; }
         List<GenericItem> PowerSlots { get; }
+        string HitDice { get; set; }
     }
 }

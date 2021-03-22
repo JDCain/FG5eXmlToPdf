@@ -14,7 +14,9 @@ namespace FG5eXmlToPDF.Models
         public List<GenericItem> Feats { get; }
         public List<GenericItem> Features { get;}
         public List<GenericItem> Inventory { get; }
+        public List<Coin> Coins { get; }
         public List<Class> Classes { get;  }
+        public string HitDice { get; set; }
         public List<Weapon> Weapons { get; }
         public List<PowerGroup> PowerGroup { get; }
         public List<GenericItem> PowerSlots { get; }
@@ -36,7 +38,7 @@ namespace FG5eXmlToPDF.Models
                 new Properity("Height"),
                 new Properity("Ideals"),
                 new Properity("PersonalityTraits"),
-                new Properity("Initiative"),
+                new Properity("Initiative", "initiative/total"),
                 new Properity("HPMax", "hp/total"),
                 new Properity("Passive", "perception"),
                 new Properity("Speed", "speed/total"),
@@ -57,6 +59,7 @@ namespace FG5eXmlToPDF.Models
             Abilities = new List<Ability>();
             Skills = new List<Skill>();
             Classes = new List<Class>();
+            HitDice = string.Empty;
             Weapons = new List<Weapon>();
             Proficiencies = new List<string>();
             Languages = new List<string>();
@@ -64,6 +67,7 @@ namespace FG5eXmlToPDF.Models
             Feats = new List<GenericItem>();
             Features = new List<GenericItem>();
             Inventory = new List<GenericItem>();
+            Coins = new List<Coin>();
             PowerGroup = new List<PowerGroup>();
             PowerSlots = new List<GenericItem>();
         }

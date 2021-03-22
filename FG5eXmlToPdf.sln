@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FG5eXmlToPdf", "FG5eXmlToPdf\FG5eXmlToPdf.csproj", "{CABF048C-DDEC-4323-987D-09E2C2C8A99F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FG5eXmlToPdf.Tests", "FG5eXmlToPdf.Tests\FG5eXmlToPdf.Tests.csproj", "{EB74CFC3-7BBA-42AD-924F-01191DEC4B05}"
+	ProjectSection(ProjectDependencies) = postProject
+		{84AD3508-7BD6-4EC9-952D-20AC428E6DDE} = {84AD3508-7BD6-4EC9-952D-20AC428E6DDE}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FG5eXmlToPdf.Console", "FG5eXmlToPdf.Console\FG5eXmlToPdf.Console.csproj", "{84AD3508-7BD6-4EC9-952D-20AC428E6DDE}"
 EndProject
