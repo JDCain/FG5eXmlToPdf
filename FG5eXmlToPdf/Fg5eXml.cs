@@ -117,20 +117,23 @@ namespace FG5eXmlToPDF
                 }
             }
             var powerSlotsList = XPathElementList("powermeta");
-            foreach (var slotElement in powerSlotsList)
+            if (powerSlotsList != null)
             {
-                try
+                foreach (var slotElement in powerSlotsList)
                 {
-                    character.PowerSlots.Add(new GenericItem()
+                    try
                     {
-                        Name = slotElement.Name.ToString(),
-                        Text = slotElement.Elements("max").First().Value
+                        character.PowerSlots.Add(new GenericItem()
+                        {
+                            Name = slotElement.Name.ToString(),
+                            Text = slotElement.Elements("max").First().Value
 
-                    });
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Could not parse PowerMeta: {0}", slotElement);
+                        });
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Could not parse PowerMeta: {0}", slotElement);
+                    }
                 }
             }
             
@@ -228,7 +231,7 @@ namespace FG5eXmlToPDF
             {
                 Name = power.Element("name").Value,
                 Level = int.Parse((power.Element("level").Value)),
-                Prepaired = Helper.StringIntToBool(((power.Element("prepared").Value))),
+                Prepaired = Helper.StringIntToBool(((power.Element("prepared")?.Value ?? "0"))),
                 Group = power.Element("group").Value,
 
             });
