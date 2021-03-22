@@ -114,28 +114,45 @@ namespace FG5eXmlToPDF
             foreach (var weapon in character.Weapons.Take(3))
             {
                 form.SetField($"Wpn{n} Name", weapon.Name);
+                form.SetField($"Wpn{n} AtkBonus", $"{createAttackBonus(character, weapon)}");
+                form.SetField($"Wpn{n} Damage", createDamageString(character, weapon));
+                n++;
+            }
+            String additionalWeapons =  "";
+            foreach (var weapon in character.Weapons.Skip(3)){
+                additionalWeapons += weapon.Name + ";  " + "Atk +" + createAttackBonus(character, weapon) + ";  " + createDamageString(character, weapon) + Environment.NewLine;
+            }
+            form.SetFieldProperty("AttacksSpellcasting", "textsize", 8f, null);
+            form.SetField("AttacksSpellcasting", additionalWeapons);
+
+            int? createAttackBonus(ICharacter person, Weapon weapon)
+            {
                 var statSearch = StatSearch(weapon);
 
-                var attack = character.Abilities.FirstOrDefault(x => x.Name == statSearch)?.Bonus + weapon.AttackBonus;
+                var attack = person.Abilities.FirstOrDefault(x => x.Name == statSearch)?.Bonus + weapon.AttackBonus;
 
                 if (weapon.Prof)
                 {
-                    if (int.TryParse(character.Properities?.FirstOrDefault(x => x.Name == "ProfBonus")?.Value, out var intOut))
+                    if (int.TryParse(person.Properities?.FirstOrDefault(x => x.Name == "ProfBonus")?.Value, out var intOut))
                     {
                         attack += intOut;
                     }
                 }
-                form.SetField($"Wpn{n} AtkBonus", $"{attack}");
 
+                return attack;
+            }
+
+            string createDamageString(ICharacter person, Weapon weapon)
+            {
                 var damageString = string.Empty;
                 foreach (var damage in weapon.Damages)
                 {
                     damageString = string.IsNullOrWhiteSpace(damageString) ? "" : damageString + " & ";
                     damageString +=
-                        $"{damage.Dice} + {character.Abilities.FirstOrDefault(x => x.Name == (damage.Stat == "base" ? StatSearch(weapon) : damage.Stat))?.Bonus + int.Parse(damage.Bonus)} {damage.Type}";
+                        $"{damage.Dice} + {person.Abilities.FirstOrDefault(x => x.Name == (damage.Stat == "base" ? StatSearch(weapon) : damage.Stat))?.Bonus + int.Parse(damage.Bonus)} {damage.Type}";
                 }
-                form.SetField($"Wpn{n} Damage", damageString);
-                n++;
+
+                return damageString;
             }
         }
 

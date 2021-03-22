@@ -81,17 +81,18 @@ namespace FG5eXmlToPdf.Tests
         {
             GenerateSheet("faffner20170928.xml", _sourceDirectory);
         }
+
         [TestMethod]
         public void Faffner()
         {
             GenerateSheet("faffner.xml", _sourceDirectory);
         }
+
         [TestMethod]
         public void RandomWarlockTest()
         {
             GenerateSheet("randomWarlock.xml", _sourceDirectory);
         }
-
 
         [TestMethod]
         public void JandarTest()
@@ -122,5 +123,35 @@ namespace FG5eXmlToPdf.Tests
         {
             GenerateSheet("Vachnu.xml", _sourceDirectory);
         }
+        [TestMethod]
+        public void Char1Test()
+        {
+            GenerateSheet("char1.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void Char2Test()
+        {
+            GenerateSheet("char2.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void Char3Test()
+        {
+            GenerateSheet("char3.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void Char4Test()
+        {
+            GenerateSheet("char4.xml", _sourceDirectory);
+        }
+
+        [TestMethod]
+        public void Char5Test()
+        {
+            GenerateSheet("char5.xml", _sourceDirectory);
+        }
+
     }
 }
